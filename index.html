@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Gravity of Power</title>
+<title>What if AI breaks the oldest pattern in human civilization?</title>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -64,6 +64,7 @@
     color: var(--text);
     margin-bottom: 28px;
     letter-spacing: -0.02em;
+    text-transform: none;
   }
   .hero h1 em { color: var(--accent); font-style: italic; }
   .hero-sub { font-size: 19px; color: var(--text-dim); max-width: 600px; line-height: 1.7; }
@@ -75,18 +76,18 @@
     font-family: 'Instrument Serif', serif;
     font-size: 32px;
     font-weight: 400;
-    margin-bottom: 20px;
+    margin-bottom: 8px;
     color: var(--text);
     letter-spacing: -0.01em;
+    text-transform: none;
   }
-  h2 .phase-label {
+  h2 .date {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 13px;
+    font-size: 14px;
     color: var(--accent-dim);
     display: block;
     margin-bottom: 6px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
+    letter-spacing: 0.05em;
   }
   h3 {
     font-family: 'Instrument Serif', serif;
@@ -99,664 +100,532 @@
   p { margin-bottom: 20px; color: var(--text); }
   strong { color: var(--accent); font-weight: 500; }
 
-  /* --- ACCRETION DIAGRAM --- */
-  .diagram-accretion {
-    margin: 40px auto;
-    max-width: 520px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
-    padding: 40px 20px;
-  }
-  .accretion-stage {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    flex: 1;
-  }
-  .accretion-dust {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(154, 107, 30, 0.06) 20%, rgba(154, 107, 30, 0.02) 60%, transparent 80%);
-    border: 1px dashed var(--border);
-    position: relative;
-  }
-  .accretion-dust::before, .accretion-dust::after {
-    content: '';
-    position: absolute;
-    border-radius: 50%;
-    background: var(--accent-dim);
-    opacity: 0.3;
-  }
-  .accretion-dust::before { width: 4px; height: 4px; top: 20px; left: 30px; }
-  .accretion-dust::after { width: 3px; height: 3px; top: 45px; left: 50px; }
-  .accretion-dense {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(154, 107, 30, 0.2) 10%, rgba(154, 107, 30, 0.08) 50%, transparent 75%);
-    border: 1px solid var(--accent-dim);
-  }
-  .accretion-star {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(154, 107, 30, 0.5) 0%, rgba(154, 107, 30, 0.2) 40%, rgba(154, 107, 30, 0.05) 70%, transparent 90%);
-    border: 2px solid var(--accent);
-    box-shadow: 0 0 30px var(--accent-glow), 0 0 60px rgba(154, 107, 30, 0.04);
-  }
-  .accretion-arrow {
-    font-size: 20px;
-    color: var(--accent-dim);
-    flex-shrink: 0;
-    flex-grow: 0;
-    flex-basis: auto;
-  }
-  .accretion-label {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    text-align: center;
-  }
-
-  /* --- EQUILIBRIUM DIAGRAM --- */
-  .diagram-equilibrium {
-    margin: 40px auto;
-    max-width: 500px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0;
-    padding: 30px 20px;
-    position: relative;
-  }
-  .eq-force {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-    flex: 1;
-  }
-  .eq-arrow-out {
-    font-size: 32px;
-    color: var(--accent);
-    letter-spacing: -4px;
-  }
-  .eq-arrow-in {
-    font-size: 32px;
-    color: var(--blue);
-    letter-spacing: -4px;
-  }
-  .eq-center {
-    width: 90px;
-    height: 90px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(154, 107, 30, 0.3) 0%, rgba(154, 107, 30, 0.1) 50%, transparent 80%);
-    border: 2px solid var(--accent);
-    box-shadow: 0 0 25px var(--accent-glow);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-  }
-  .eq-center-label {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 9px;
-    color: var(--accent);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    text-align: center;
-    line-height: 1.4;
-  }
-  .eq-label {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    text-align: center;
-    line-height: 1.5;
-  }
-  .eq-label.fusion { color: var(--accent); }
-  .eq-label.gravity { color: var(--blue); }
-
-  /* --- COLLAPSE TYPOLOGY --- */
-  .diagram-collapse {
-    margin: 40px auto;
-    max-width: 600px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 24px;
-    padding: 20px 0;
-  }
-  .collapse-type {
+  .tech-card {
     background: var(--bg-card);
     border: 1px solid var(--border);
     border-radius: 8px;
-    padding: 28px 24px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 16px;
+    padding: 20px 24px;
+    margin: 24px 0 28px;
+    display: grid;
+    gap: 12px;
   }
-  .collapse-type.supernova .collapse-visual {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(176, 74, 58, 0.5) 0%, rgba(176, 74, 58, 0.2) 30%, rgba(176, 74, 58, 0.05) 60%, transparent 80%);
-    box-shadow: 0 0 30px rgba(176, 74, 58, 0.15), 0 0 60px rgba(176, 74, 58, 0.05);
-    position: relative;
-  }
-  .collapse-type.supernova .collapse-visual::before {
-    content: '';
-    position: absolute;
-    top: -10px; left: -10px; right: -10px; bottom: -10px;
-    border-radius: 50%;
-    border: 1px dashed var(--red);
-    opacity: 0.3;
-  }
-  .collapse-type.whitedwarf .collapse-visual {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(154, 107, 30, 0.15) 0%, rgba(154, 107, 30, 0.05) 50%, transparent 80%);
-    border: 1px solid var(--border);
-    opacity: 0.7;
-  }
-  .collapse-title {
+  .tech-card .row { display: flex; gap: 12px; align-items: baseline; }
+  .tech-card .label {
     font-family: 'JetBrains Mono', monospace;
     font-size: 11px;
     text-transform: uppercase;
     letter-spacing: 0.1em;
+    min-width: 120px;
+    flex-shrink: 0;
   }
-  .collapse-type.supernova .collapse-title { color: var(--red); }
-  .collapse-type.whitedwarf .collapse-title { color: var(--text-muted); }
-  .collapse-desc {
-    font-size: 13px;
-    color: var(--text-dim);
-    text-align: center;
-    line-height: 1.5;
+  .tech-card .label.tech { color: var(--blue); }
+  .tech-card .label.advantage { color: var(--green); }
+  .tech-card .label.shift { color: var(--red); }
+  .tech-card .value { font-size: 14px; color: var(--text-dim); line-height: 1.6; }
+
+  /* Timeline */
+  .mega-timeline { position: relative; padding: 60px 0; }
+  .mega-timeline h2 { text-align: center; margin-bottom: 50px; }
+  .timeline-track {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 0 10px;
   }
-  .collapse-example {
+  .timeline-track::before {
+    content: '';
+    position: absolute;
+    top: 28px;
+    left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent-dim) 0%, var(--accent) 30%, var(--accent) 70%, var(--accent-dim) 100%);
+  }
+  .timeline-node { position: relative; display: flex; flex-direction: column; align-items: center; flex: 1; min-width: 0; }
+  .timeline-dot {
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: 2px solid var(--bg);
+    box-shadow: 0 0 12px var(--accent-glow);
+    position: relative; z-index: 2;
+    margin-top: 22px;
+  }
+  .timeline-dot.active {
+    width: 16px; height: 16px;
+    margin-top: 20px;
+    box-shadow: 0 0 20px rgba(154, 107, 30, 0.3);
+  }
+  .timeline-year {
     font-family: 'JetBrains Mono', monospace;
     font-size: 10px;
-    color: var(--text-muted);
-    letter-spacing: 0.05em;
-  }
-
-  /* --- SHOCKWAVE CHAIN --- */
-  .diagram-shockwave {
-    margin: 40px auto;
-    max-width: 600px;
-    padding: 30px 10px;
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-  }
-  .shock-link {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 12px 0;
-  }
-  .shock-collapse {
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: radial-gradient(circle, rgba(176, 74, 58, 0.3) 0%, rgba(176, 74, 58, 0.08) 60%, transparent 85%);
-    border: 1px solid rgba(176, 74, 58, 0.3);
-  }
-  .shock-arrow {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 16px;
     color: var(--accent-dim);
-    flex-shrink: 0;
-  }
-  .shock-formation {
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    flex-shrink: 0;
-    background: radial-gradient(circle, rgba(154, 107, 30, 0.35) 0%, rgba(154, 107, 30, 0.1) 50%, transparent 80%);
-    border: 1.5px solid var(--accent);
-    box-shadow: 0 0 15px var(--accent-glow);
-  }
-  .shock-text {
-    font-size: 14px;
-    color: var(--text-dim);
-    line-height: 1.5;
-    flex: 1;
-  }
-  .shock-text .era {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    color: var(--accent-dim);
+    margin-top: 12px;
     letter-spacing: 0.05em;
+    text-align: center;
   }
-
-  /* --- TIME COMPRESSION --- */
-  .diagram-compression {
-    margin: 40px auto;
-    max-width: 520px;
-    padding: 20px 0;
-  }
-  .compression-bar {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    padding: 8px 0;
-  }
-  .compression-label {
-    font-family: 'JetBrains Mono', monospace;
+  .timeline-label {
     font-size: 11px;
     color: var(--text-dim);
-    min-width: 160px;
-    text-align: right;
-    letter-spacing: 0.03em;
+    margin-top: 4px;
+    text-align: center;
+    max-width: 80px;
     line-height: 1.4;
   }
-  .compression-track {
-    flex: 1;
-    height: 18px;
+
+  /* Core-periphery diagram */
+  .cp-diagram { margin: 40px auto; max-width: 500px; }
+  .cp-rings { position: relative; width: 340px; height: 340px; margin: 0 auto 30px; }
+  .cp-ring { position: absolute; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+  .cp-ring.periphery {
+    width: 340px; height: 340px; top: 0; left: 0;
+    border: 1px solid var(--border);
+    background: radial-gradient(circle, transparent 60%, rgba(154, 107, 30, 0.04) 100%);
+  }
+  .cp-ring.semi {
+    width: 220px; height: 220px; top: 60px; left: 60px;
+    border: 1px dashed var(--accent-dim);
+    background: radial-gradient(circle, transparent 50%, rgba(154, 107, 30, 0.04) 100%);
+  }
+  .cp-ring.core {
+    width: 100px; height: 100px; top: 120px; left: 120px;
+    border: 2px solid var(--accent);
+    background: radial-gradient(circle, rgba(154, 107, 30, 0.12), rgba(154, 107, 30, 0.04));
+    box-shadow: 0 0 30px var(--accent-glow);
+  }
+  .cp-ring-label { font-family: 'JetBrains Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; }
+  .cp-ring.core .cp-ring-label { color: var(--accent); }
+  .cp-ring.semi .cp-ring-label { color: var(--accent-dim); position: absolute; top: 14px; }
+  .cp-ring.periphery .cp-ring-label { color: var(--text-muted); position: absolute; top: 14px; }
+  .cp-arrows { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; }
+  .cp-legend { display: flex; justify-content: center; gap: 30px; font-size: 13px; color: var(--text-dim); }
+  .cp-legend span { display: flex; align-items: center; gap: 8px; }
+  .cp-legend .arrow-in { color: var(--accent); font-size: 16px; }
+  .cp-legend .arrow-out { color: var(--text-muted); font-size: 16px; }
+
+  /* Power chart */
+  .power-chart {
+    margin: 40px 0;
     background: var(--bg-card);
-    border-radius: 3px;
-    overflow: hidden;
-    position: relative;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 28px;
   }
-  .compression-fill {
-    height: 100%;
-    background: linear-gradient(90deg, var(--accent), var(--accent-dim));
-    border-radius: 3px;
-    transition: width 0.3s ease;
-  }
-  .compression-years {
+  .power-chart-title {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    color: var(--accent-dim);
-    min-width: 60px;
-    letter-spacing: 0.03em;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    margin-bottom: 24px;
+  }
+  .power-row { display: flex; align-items: center; margin-bottom: 16px; gap: 14px; }
+  .power-era { font-size: 12px; color: var(--text-dim); min-width: 110px; text-align: right; }
+  .power-bar-track {
+    flex: 1; height: 24px;
+    background: rgba(0,0,0,0.04);
+    border-radius: 4px;
+    position: relative; overflow: hidden;
+  }
+  .power-bar {
+    height: 100%; border-radius: 4px;
+    display: flex; align-items: center;
+    padding-left: 10px;
+  }
+  .power-bar .bar-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: rgba(255,255,255,0.9);
+    white-space: nowrap;
   }
 
-  /* --- RESPONSIVE --- */
+  /* Callout */
+  .callout {
+    border-left: 2px solid var(--accent);
+    padding: 16px 24px;
+    margin: 28px 0;
+    background: var(--accent-glow);
+    border-radius: 0 6px 6px 0;
+  }
+  .callout p {
+    margin: 0; color: var(--text);
+    font-family: 'Instrument Serif', serif;
+    font-size: 20px; font-style: italic; line-height: 1.6;
+  }
+
+  /* Tech grid */
+  .tech-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+    margin: 24px auto;
+    max-width: 480px;
+  }
+  .tech-cell {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    padding: 12px 8px;
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    background: var(--bg-card);
+    text-align: center;
+    line-height: 1.3;
+  }
+  .tech-cell.current {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: var(--accent-glow);
+    box-shadow: 0 0 12px rgba(154, 107, 30, 0.15);
+    font-weight: 500;
+  }
+  .tech-cell.future {
+    border-color: var(--accent-dim);
+    border-style: dashed;
+    color: var(--accent-dim);
+  }
+  .tech-cell .tech-year {
+    display: block;
+    font-size: 9px;
+    color: var(--text-muted);
+    margin-top: 4px;
+    letter-spacing: 0.05em;
+  }
+  .tech-cell.current .tech-year { color: var(--accent-dim); }
+  .tech-cell.future .tech-year { color: var(--accent-dim); opacity: 0.7; }
+
+  .footer { padding: 60px 0; text-align: center; }
+  .footer p { font-family: 'Instrument Serif', serif; font-size: 22px; font-style: italic; color: var(--text-dim); }
+
   @media (max-width: 600px) {
-    .hero { padding: 60px 0 40px; }
-    section { padding: 40px 0; }
-    .diagram-accretion { flex-direction: column; gap: 12px; }
-    .accretion-arrow { transform: rotate(90deg); }
-    .diagram-collapse { grid-template-columns: 1fr; }
-    .diagram-equilibrium { flex-direction: column; }
-    .shock-link { flex-wrap: wrap; }
-    .compression-label { min-width: 120px; font-size: 10px; }
+    .timeline-track { flex-wrap: wrap; gap: 10px; justify-content: center; }
+    .timeline-track::before { display: none; }
+    .tech-card .row { flex-direction: column; gap: 4px; }
+    .tech-card .label { min-width: auto; }
+    .power-row { flex-direction: column; align-items: flex-start; gap: 4px; }
+    .power-era { text-align: left; min-width: auto; }
+    .cp-rings { transform: scale(0.8); transform-origin: center; }
   }
 </style>
 </head>
 <body>
 <div class="grain"></div>
+
 <div class="container">
 
-  <!-- HERO -->
   <header class="hero">
-    <h1>The <em>Gravity</em> of Power</h1>
-    <p class="hero-sub">Why power always pools, why empires always die, and why the material always reforms somewhere else.</p>
+    <h1>What if AI breaks the <em>oldest pattern</em> in human civilization?</h1>
+    <p class="hero-sub">A meditation on five thousand years of power concentration, prompted by a thought experiment about the next two.</p>
   </header>
 
-  <!-- SECTION I: INTRO — WHY STARS? -->
+  <!-- CITRINI CONTEXT -->
   <section>
-    <h2><span class="phase-label">Prologue</span>Why stars?</h2>
-
-    <p>Artificial intelligence might be the most concentrating technology ever built. Or the most distributing. We don't know yet. The companies building frontier models are worth more than most countries. The models themselves could, in theory, make centuries of accumulated institutional advantage replicable overnight. Which outcome we get may be the most consequential question of the next fifty years.</p>
-
-    <p>But to answer it, you have to understand something older. <strong>For about 5,000 years, power has pooled in certain places and radiated outward, pulling resources and labor back toward the center.</strong> The location changes. The technology changes. The justifying story changes. The pattern doesn't.</p>
-
-    <p>This essay argues that the pattern works like stellar physics. Not as a metaphor. As a model.</p>
-
-    <p>A random patch of dust in space ends up slightly denser than its surroundings. That small advantage pulls in more material. More mass, more pull, more mass. A feedback loop that turns a slight imbalance into a star. Once the star forms, it holds — fusion pushing outward against gravity pulling inward — for as long as the fuel lasts. When the fuel runs out, the star collapses. But the material doesn't vanish. A supernova's shockwave compresses nearby gas clouds and triggers new star formation. <strong>The death of one center causes the birth of the next.</strong></p>
-
-    <p>This maps precisely onto what we see across five millennia of human civilization. Mesopotamia had fertile river valleys. Baghdad sat on trade crossroads. Britain had coal in the right place. Each was a patch of dust slightly denser than its surroundings. Each compounded a small advantage into a center of gravity. Each held through equilibrium — output balancing cost — until the fuel ran out. And each collapse scattered material from which the next center formed.</p>
-
-    <p>In the 1970s, the sociologist Immanuel Wallerstein formalized this as world-systems theory: at any point in history, the world sorts itself into a core that sets rules and captures surplus, a periphery that supplies raw materials and labor, and a semi-periphery in between. Other scholars — Andre Gunder Frank, Barry Gills — argued the pattern goes back not to Wallerstein's starting point of 1500 but to the Bronze Age. When you trace it, they're hard to argue with.</p>
-
-    <p>Others have circled pieces of this idea. Marx described capital as subject to "attraction" and "repulsion" — gravitational language borrowed from Newton. Simone Weil, in <em>Gravity and Grace</em>, called gravity the force that "impels each creature to seek everything which can preserve or enlarge it." Henry Adams applied thermodynamics to history and predicted accelerating crisis in 1909. Spengler used biology. Toynbee used challenge-and-response. Ibn Khaldun used social cohesion.</p>
-
-    <p><strong>Nobody mapped the full stellar lifecycle — accretion, equilibrium, collapse, shockwave, reformation — onto the rotation of world-system cores across five thousand years.</strong> That's what this essay does. Four phases, then a question: does AI introduce a fifth — physics that's never existed before?</p>
+    <p>Last Sunday, Citrini Research published a thought experiment called <a href="https://www.citriniresearch.com/p/2028gic" style="color: var(--accent);">"The 2028 Global Intelligence Crisis."</a> Written as a fictional macro memo from June 2028, it traced how AI-driven white-collar displacement could spiral into a full economic crisis: 10% unemployment, a 38% drawdown in the S&P, <em>Ghost GDP</em> that shows up in national accounts but never reaches households, a $13 trillion mortgage market built on income assumptions that no longer hold.</p>
+    <p>Monday, the market lost over 800 points on the Dow. DoorDash, American Express, KKR, and Blackstone dropped 8%+. IBM fell nearly 12% after Anthropic separately announced that Claude could automate COBOL modernization. Sixteen million views on X. Michael Burry reshared it with "And you think I'm bearish." Wall Street economists fired back, calling it allegorical, saying productivity booms create growth not crises, pointing out that labor data doesn't show collapse yet.</p>
+    <p>The debate that followed was almost entirely forward-looking. How fast will AI displace jobs? Will new industries absorb the displaced? Can policy respond in time?</p>
+    <p>This piece goes the other direction. Instead of staring at the next two years, I wanted to take a step back and look at the last five thousand. Because the pattern Citrini is describing, where productive power concentrates and the gains flow to whoever controls it while everyone else adjusts, is not new. It's arguably the oldest recurring dynamic in human civilization.</p>
+    <p>For about 5,000 years, power has pooled in certain places and radiated outward, pulling resources and labor back toward the center. The location changes, the technology changes, the justifying story changes. The pattern doesn't.</p>
+    <p><strong>The question isn't whether AI will be disruptive. The question is whether it disrupts the pattern itself, or just picks the next occupant.</strong></p>
   </section>
 
-  <!-- SECTION II: ACCRETION — WHY CENTERS FORM -->
+  <!-- FRAMEWORK -->
   <section>
-    <h2><span class="phase-label">Phase I</span>Accretion — why centers form</h2>
+    <h2>The framework</h2>
+    <p>In the 1970s, a sociologist named Immanuel Wallerstein proposed something called <em>world-systems theory</em>. The idea is structural, not moral.</p>
+    <p>At any point in history, the world sorts itself into tiers. A <strong>core</strong>, where high-value production and rule-setting concentrate. A <strong>periphery</strong>, which supplies raw materials and labor. And a <strong>semi-periphery</strong> in between that participates in both directions.</p>
 
-    <p>In astrophysics, star formation begins with a molecular cloud — a vast field of gas and dust, mostly uniform. But not perfectly uniform. Some region, by chance or by external compression, ends up slightly denser than the rest. That density advantage creates a gravitational pull. The pull draws in more material. More material increases the mass. More mass strengthens the pull. <strong>A feedback loop that turns a slight imbalance into a star.</strong></p>
-
-    <p>The same loop has driven every center of power in recorded history.</p>
-
-    <h3>Mesopotamia: the original density advantage</h3>
-
-    <p>The earliest version we can identify. The Tigris and Euphrates gave southern Mesopotamia something nowhere else had in the same combination: fertile soil, reliable water, and a flat floodplain where irrigation could scale. That was the initial density advantage — the patch of dust slightly denser than the rest.</p>
-
-    <p>Irrigation produced grain surplus. Surplus meant not everyone had to farm, which freed labor for specialization — potters, metalworkers, scribes, soldiers. Managing that complexity required administration, which produced writing. Protecting it required armies. Extending it required trade networks. Each step funded the next. <strong>Surplus created infrastructure. Infrastructure attracted people. People produced more surplus. More mass, more pull, more mass.</strong></p>
-
-    <p>Within a few centuries, these river valley civilizations — Mesopotamia, Egypt, the Indus Valley, Shang China — had become the first cores. They stockpiled grain, developed writing systems, built armies, and projected power outward. The Hittites in Anatolia and the Minoans on Crete sat in between, middlemen who processed and traded and occasionally challenged the established centers. The periphery supplied what the centers couldn't produce themselves.</p>
-
-    <p>Even 5,000 years ago, the geometry was recognizable: core, semi-periphery, periphery. Resources and labor flowing inward. Influence and rules radiating outward.</p>
-
-    <p>The technology that defined the era — bronze — was also what revealed the system's structure. Tin and copper almost never occur in the same place. Mesopotamia needed tin from Afghanistan and copper from Cyprus. The center depended on a supply chain that stretched thousands of miles. The feedback loop that built the center also built the dependencies that would eventually destroy it.</p>
-
-    <h3>Britain: the same physics, industrial inputs</h3>
-
-    <p>Fast-forward four thousand years. Britain in the mid-1700s had a density advantage that looked nothing like Mesopotamia's but operated identically. Coal deposits — massive ones, in the right places, near navigable rivers and ports. An island geography that made naval defense cheaper than land defense. A financial system, developed through centuries of trade, that could fund large-scale enterprise.</p>
-
-    <p>The feedback loop: coal powered steam engines. Steam engines pumped water out of coal mines, letting them go deeper, extracting more coal. More coal powered more machines. Machines multiplied output by orders of magnitude. That output funded more machines, more infrastructure, more naval power, more colonial extraction. <strong>Within two generations, one country's coal advantage had compounded into control of global trade, the reserve currency, and the world's largest empire.</strong></p>
-
-    <p>Nobody planned this. Britain didn't sit down and decide to become the center of the world. It had a slightly denser patch of resources and institutions, and a mechanism — industrialization — that compounded the advantage faster than anything before it.</p>
-
-    <h3>Silicon Valley: modern accretion</h3>
-
-    <p>Stanford University plus military R&D contracts in the 1950s. That was the initial density. Fairchild Semiconductor spun out of Shockley's lab. Fairchild's alumni founded Intel, AMD, and dozens of others. Venture capital emerged to fund the spinoffs. The spinoffs attracted more talent. The talent attracted more capital. The capital funded more companies.</p>
-
-    <p>The same feedback loop: a slight initial density advantage, compounding through a mechanism that fed itself. Now a narrow strip of Northern California controls the technology stack that the rest of the world runs on.</p>
-
-    <!-- ACCRETION DIAGRAM -->
-    <div class="diagram-accretion">
-      <div class="accretion-stage">
-        <div class="accretion-dust"></div>
-        <span class="accretion-label">Dust cloud</span>
+    <div class="cp-diagram">
+      <div class="cp-rings">
+        <div class="cp-ring periphery"><span class="cp-ring-label">Periphery</span></div>
+        <div class="cp-ring semi"><span class="cp-ring-label">Semi-periphery</span></div>
+        <div class="cp-ring core"><span class="cp-ring-label">Core</span></div>
+        <svg class="cp-arrows" viewBox="0 0 340 340">
+          <defs>
+            <marker id="arrowIn" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#9a6b1e" opacity="0.7"/></marker>
+            <marker id="arrowOut" markerWidth="8" markerHeight="6" refX="0" refY="3" orient="auto"><polygon points="8 0, 0 3, 8 6" fill="#8a8880" opacity="0.5"/></marker>
+          </defs>
+          <line x1="50" y1="170" x2="125" y2="170" stroke="#9a6b1e" stroke-width="1.5" opacity="0.5" marker-end="url(#arrowIn)"/>
+          <line x1="290" y1="170" x2="215" y2="170" stroke="#9a6b1e" stroke-width="1.5" opacity="0.5" marker-end="url(#arrowIn)"/>
+          <line x1="170" y1="50" x2="170" y2="125" stroke="#9a6b1e" stroke-width="1.5" opacity="0.5" marker-end="url(#arrowIn)"/>
+          <line x1="170" y1="290" x2="170" y2="215" stroke="#9a6b1e" stroke-width="1.5" opacity="0.5" marker-end="url(#arrowIn)"/>
+          <line x1="100" y1="100" x2="62" y2="62" stroke="#8a8880" stroke-width="1" opacity="0.4" stroke-dasharray="4 3" marker-end="url(#arrowOut)"/>
+          <line x1="240" y1="100" x2="278" y2="62" stroke="#8a8880" stroke-width="1" opacity="0.4" stroke-dasharray="4 3" marker-end="url(#arrowOut)"/>
+          <line x1="240" y1="240" x2="278" y2="278" stroke="#8a8880" stroke-width="1" opacity="0.4" stroke-dasharray="4 3" marker-end="url(#arrowOut)"/>
+          <line x1="100" y1="240" x2="62" y2="278" stroke="#8a8880" stroke-width="1" opacity="0.4" stroke-dasharray="4 3" marker-end="url(#arrowOut)"/>
+        </svg>
       </div>
-      <span class="accretion-arrow">&rarr;</span>
-      <div class="accretion-stage">
-        <div class="accretion-dense"></div>
-        <span class="accretion-label">Density<br>advantage</span>
-      </div>
-      <span class="accretion-arrow">&rarr;</span>
-      <div class="accretion-stage">
-        <div class="accretion-star"></div>
-        <span class="accretion-label">Center of<br>gravity</span>
+      <div class="cp-legend">
+        <span><span class="arrow-in">&rarr;</span> Resources &amp; labor inward</span>
+        <span><span class="arrow-out">&rsaquo;</span> Influence &amp; rules outward</span>
       </div>
     </div>
 
-    <p><strong>None of these centers were destined.</strong> Mesopotamia wasn't chosen. Britain wasn't inevitable. Silicon Valley was an accident of Cold War defense spending and one physicist's bad management. They each had a slight initial advantage and a mechanism that compounded it. The pattern is structural, not cultural or moral. Any patch of dust dense enough will become a star.</p>
+    <p>Think of it as musical chairs. The game always has the same number of seats. Someone always ends up at the center, someone always ends up without a chair. Players rotate. The game doesn't.</p>
+    <p>Wallerstein started his clock at 1500. Other scholars, Andre Gunder Frank and Barry Gills, argued the pattern goes back much further. Maybe 5,000 years. When you trace it, they're hard to argue with.</p>
+    <p>My own read is simpler. Power works like gravity. A random patch of dust in space ends up slightly denser than its surroundings. That small advantage pulls in more material. More mass, more pull, more mass. A feedback loop that turns a slight imbalance into a star. Mesopotamia had fertile river valleys. Baghdad sat on trade crossroads. Britain had coal in the right place. A small initial advantage that compounds until it becomes a center of gravity.</p>
+    <p>What keeps a star burning is fuel — fusion pushing outward against the collapse pulling inward. Empires run on their own version. Surplus, trade revenue, institutional legitimacy. When the cost of holding everything together exceeds what the system produces, the fuel runs out. The mass doesn't disappear. It reforms somewhere else.</p>
+    <p>Marx called it the "attraction of capitals." Simone Weil called gravity the force that "impels each creature to seek everything which can preserve or enlarge it." Henry Adams applied thermodynamics to history and predicted accelerating crisis in 1909. The physics changes. The observation doesn't.</p>
+    <p>That's the pattern this piece traces. Not who deserves to be at the center, but why there's always a center at all.</p>
   </section>
 
-  <!-- SECTION III: EQUILIBRIUM — WHY CENTERS HOLD -->
-  <section>
-    <h2><span class="phase-label">Phase II</span>Equilibrium — why centers hold</h2>
-
-    <p>Once a star forms, it doesn't just keep collapsing. Fusion ignites in the core — hydrogen atoms fusing into helium, releasing enormous energy. That energy pushes outward as radiation pressure. Gravity pulls inward. <strong>As long as the fuel lasts, neither force wins. That tension is the stable state.</strong> A star can burn for billions of years in equilibrium. It looks permanent. It isn't. It's a balanced war.</p>
-
-    <p>Every center of power in history has run on its own version of this tension.</p>
-
-    <h3>Rome: centuries of balanced war</h3>
-
-    <p>Rome is the clearest case — a center that held equilibrium for longer than most, and whose mechanics are well enough documented to see the physics clearly.</p>
-
-    <p>The outward force — Rome's fusion — was institutional. Legal frameworks that standardized commerce across three continents. A common currency that let a merchant in Gaul trade with one in Syria. Roads that moved armies and goods at speeds that wouldn't be matched for over a thousand years. Aqueducts that made cities viable in places where they shouldn't have been. Grain from Egypt, metals from Iberia, luxury goods from the East — all flowing inward through a system that worked because the rules were predictable and the infrastructure was real.</p>
-
-    <p>The inward pull — gravity — was cost. Defending borders that stretched from Britain to Mesopotamia. Feeding an army of over 300,000. Maintaining roads, ports, aqueducts, and administrative systems across a territory that took months to cross. Managing the political complexity of dozens of provinces, each with its own elites demanding a cut.</p>
-
-    <p><strong>Rome lasted centuries not because it was invincible but because the energy it generated — taxes, trade revenue, institutional legitimacy — kept pace with the cost of its own weight.</strong> The whole Mediterranean operated as one economic zone. That was the equilibrium. Not peace. Tension.</p>
-
-    <p>The signs of stable equilibrium are always the same: everyone uses your currency, your roads, your legal system. The center becomes the default. The cost of opting out exceeds the cost of opting in. That's not domination in the traditional sense. It's gravity.</p>
-
-    <h3>The Han Dynasty: parallel equilibrium</h3>
-
-    <p>On the other side of the world, the Han Dynasty ran an almost identical balancing act. The Silk Road projected Chinese goods and influence outward. Central Asian oasis cities served as semi-periphery — middlemen connecting the Han core to markets further west. Steppe nomads at the edges functioned as periphery, periodically raiding, occasionally reshaping everything.</p>
-
-    <p>The Han's fusion was similar to Rome's: agricultural surplus from the Yellow and Yangtze river basins, a sophisticated bureaucracy selected by examination, standardized weights and measures, a legal system that held the territory together. The gravity was similar too: cost of defending the northern frontier, managing regional elites, maintaining the infrastructure that made the system work.</p>
-
-    <p>These two equilibria — Roman and Han — ran in parallel, loosely linked through the Silk Road and Indian Ocean trade routes. A proto-global economy, thousands of years before the word "globalization" existed.</p>
-
-    <h3>The United States: institutional equilibrium</h3>
-
-    <p>After World War II, the United States built the most sophisticated version of the pattern. Instead of territorial control, it created institutions — the UN, IMF, World Bank, NATO, WTO — and made the dollar the operating currency of global trade.</p>
-
-    <p>The outward force: the Bretton Woods system, then the petrodollar arrangement, meant international commerce flowed through American currency. GPS, the internet, semiconductor supply chains — the technological infrastructure that the world runs on was designed in and controlled from the American core. The alliance network provided security guarantees that made the American system the default.</p>
-
-    <p>The inward pull: maintaining 750+ military bases in 80+ countries. Funding the institutions. Managing the political complexity of a global alliance network. The cost of being the center.</p>
-
-    <p>Same physics. More sophisticated mechanism. The question, as always, is how long the fuel lasts.</p>
-
-    <!-- EQUILIBRIUM DIAGRAM -->
-    <div class="diagram-equilibrium">
-      <div class="eq-force">
-        <span class="eq-arrow-out">&laquo;&laquo;&laquo;</span>
-        <span class="eq-label fusion">Fusion<br>Surplus &bull; Trade<br>Institutions</span>
-      </div>
-      <div class="eq-center">
-        <span class="eq-center-label">Center<br>holds</span>
-      </div>
-      <div class="eq-force">
-        <span class="eq-arrow-in">&raquo;&raquo;&raquo;</span>
-        <span class="eq-label gravity">Gravity<br>Cost &bull; Borders<br>Complexity</span>
+  <!-- TIMELINE -->
+  <section class="mega-timeline">
+    <h2>5,000 years of power pooling</h2>
+    <div style="overflow-x: auto; padding: 10px 0;">
+      <div class="timeline-track" style="min-width: 700px;">
+        <div class="timeline-node"><div class="timeline-dot"></div><div class="timeline-year">~3000 BC</div><div class="timeline-label">Bronze Age cores</div></div>
+        <div class="timeline-node"><div class="timeline-dot"></div><div class="timeline-year">~1200 BC</div><div class="timeline-label">Bronze Age collapse</div></div>
+        <div class="timeline-node"><div class="timeline-dot"></div><div class="timeline-year">~800 BC</div><div class="timeline-label">Classical cores</div></div>
+        <div class="timeline-node"><div class="timeline-dot"></div><div class="timeline-year">~500 AD</div><div class="timeline-label">Rome falls</div></div>
+        <div class="timeline-node"><div class="timeline-dot"></div><div class="timeline-year">~700</div><div class="timeline-label">Islamic golden age</div></div>
+        <div class="timeline-node"><div class="timeline-dot"></div><div class="timeline-year">~1200</div><div class="timeline-label">Mongol integration</div></div>
+        <div class="timeline-node"><div class="timeline-dot"></div><div class="timeline-year">~1400</div><div class="timeline-label">Ming withdrawal</div></div>
+        <div class="timeline-node"><div class="timeline-dot"></div><div class="timeline-year">~1450</div><div class="timeline-label">European rise</div></div>
+        <div class="timeline-node"><div class="timeline-dot"></div><div class="timeline-year">~1800</div><div class="timeline-label">British industrial</div></div>
+        <div class="timeline-node"><div class="timeline-dot"></div><div class="timeline-year">~1945</div><div class="timeline-label">American institutional</div></div>
+        <div class="timeline-node"><div class="timeline-dot active"></div><div class="timeline-year" style="color: var(--accent);">NOW</div><div class="timeline-label" style="color: var(--accent);">AI / AGI?</div></div>
       </div>
     </div>
-
-    <p><strong>The moment the cost of holding everything together exceeds what the system produces, equilibrium breaks.</strong> It doesn't happen suddenly. The imbalance starts small and compounds — the same feedback loop that built the center, running in reverse.</p>
   </section>
 
-  <!-- SECTION IV: COLLAPSE — WHY CENTERS DIE -->
+  <!-- BRONZE AGE -->
   <section>
-    <h2><span class="phase-label">Phase III</span>Collapse — why centers die</h2>
+    <h2><span class="date">~3000-1200 BC</span>Bronze Age: the first world-system</h2>
+    <div class="tech-card">
+      <div class="row"><span class="label tech">Technology</span><span class="value">Bronze metallurgy, irrigation, writing</span></div>
+      <div class="row"><span class="label advantage">Core advantage</span><span class="value">Agricultural surplus that made bureaucracy, armies, and long-distance trade possible</span></div>
+      <div class="row"><span class="label shift">Power shift</span><span class="value">Drought, trade route collapse, cascading breakdown across an interdependent network</span></div>
+    </div>
+    <p>The earliest version we can identify. The cores were river valley civilizations: Mesopotamia, Egypt, the Indus Valley, Shang China. They stockpiled grain, developed writing, built armies.</p>
+    <p>The technology that defined the era, bronze, was also what made the system fragile. Tin and copper almost never occur in the same place. Mesopotamia needed tin from Afghanistan and copper from Cyprus. Even 5,000 years ago, the center depended on a periphery for raw inputs.</p>
+    <p>The Hittites in Anatolia and the Minoans on Crete sat in between. Middlemen who processed, traded, and occasionally challenged the established centers.</p>
+    <p>Around 1200 BC, the whole thing fell apart. Nearly every major civilization collapsed within a few decades: Mycenaean Greece, the Hittite Empire, the Egyptian New Kingdom, Ugarit, the Kassite dynasty in Babylon. It wasn't one cause. Prolonged drought cut off the agricultural surplus these societies ran on. The "Sea Peoples," probably displaced populations from the collapsing edges, raided coastal cities. Tin and copper stopped flowing. Without bronze, the military and economic machinery seized up. Then came internal revolts.</p>
+    <p>No single problem would have been fatal. But the system was so interconnected that when several links broke at once, the cascade was total. <strong>First systemic crisis on record. Interconnection and fragility turned out to be the same thing.</strong></p>
+  </section>
 
-    <p>Fuel runs out. Fusion stops. Gravity wins. But not all stars die the same way.</p>
+  <!-- CLASSICAL -->
+  <section>
+    <h2><span class="date">~800 BC-500 AD</span>Classical antiquity: parallel systems</h2>
+    <div class="tech-card">
+      <div class="row"><span class="label tech">Technology</span><span class="value">Iron working, roads, aqueducts, concrete, coinage</span></div>
+      <div class="row"><span class="label advantage">Core advantage</span><span class="value">Legal and administrative systems plus standardized currency for long-distance commerce</span></div>
+      <div class="row"><span class="label shift">Power shift</span><span class="value">Overextension, internal political decay, migration pressure, inflation</span></div>
+    </div>
+    <p>Several core-periphery systems ran simultaneously.</p>
+    <p>The Mediterranean version centered first on Greece, then Rome. Rome is the clearest ancient case: grain from Egypt, metals from Iberia, luxury goods from the east, all flowing inward. Roman roads and currency were the connective tissue, doing roughly what the dollar and container ships do now. Rome's real advantage wasn't just legions. It was systemic. Legal frameworks, standardized weights, a common currency. The whole Mediterranean operated as one economic zone. That held for centuries, until the cost of defending overstretched borders combined with political instability and currency debasement hollowed the center from within. <strong>The periphery didn't really conquer Rome. Rome lost the ability to hold itself together.</strong></p>
+    <p>China's system ran in parallel. The Han Dynasty at the center, projecting outward along the Silk Road. Central Asian oasis cities as semi-periphery. Steppe nomads at the edges, periodically reshaping everything. The Han fell to a similar combination: court infighting, regional warlords, steppe pressure.</p>
+    <p>The Indian Ocean system connected South Asia, East Africa, and Southeast Asia through maritime trade.</p>
+    <p>These were loosely linked through the Silk Road and sea routes. A proto-global economy, thousands of years before the word "globalization" existed.</p>
+  </section>
 
-    <p>Small stars cool slowly into white dwarfs. The structure persists, the light fades, and the process takes a very long time. Massive stars explode in supernovae — fast, violent, total. The core collapses in seconds and the shockwave tears the outer layers apart.</p>
+  <!-- ISLAMIC -->
+  <section>
+    <h2><span class="date">~700-1200 AD</span>The Islamic golden age: a major rotation</h2>
+    <div class="tech-card">
+      <div class="row"><span class="label tech">Technology</span><span class="value">Algebra, optics, paper manufacturing, advanced irrigation and crop rotation</span></div>
+      <div class="row"><span class="label advantage">Core advantage</span><span class="value">Sat on trade crossroads between Europe, Africa, and Asia. Synthesized Greek, Persian, and Indian knowledge</span></div>
+      <div class="row"><span class="label shift">Power shift</span><span class="value">Mongol invasions (Baghdad fell 1258), fragmentation between caliphates, Crusades disrupting trade</span></div>
+    </div>
+    <p>After Rome fell, the center of gravity moved. The Islamic caliphates became the new core, spanning from Spain to Central Asia. Baghdad, C&oacute;rdoba, and Cairo were where things happened.</p>
+    <p>What made the caliphates a true core wasn't just geographic luck, though sitting on every major trade route between three continents helped. It was what they did with that position. The House of Wisdom in Baghdad systematically translated and built on Greek, Persian, Indian, and Chinese knowledge. Algebra, the algorithm (both words are Arabic), optics, early chemistry, astronomical tables that European navigators would rely on centuries later. Paper manufacturing, adopted from Chinese prisoners of war after the Battle of Talas in 751, let them scale the production of books in a way that Europe, still copying manuscripts on animal skin, couldn't match. Baghdad had bookshops when London had mud streets.</p>
+    <p>The economy reflected this. The caliphates ran a unified monetary system across a territory larger than Rome's. A merchant could travel from C&oacute;rdoba to Samarkand using the same currency and legal framework. Agricultural innovation, including new irrigation systems and the introduction of crops like rice, cotton, and sugarcane across the Mediterranean, drove surplus that funded everything else. Per capita income in the Islamic world during this period likely exceeded anything in Europe until the late Renaissance.</p>
+    <p>Europe was the periphery. Medieval Europeans exported timber, furs, and slaves (the word "slave" comes from "Slav") to the Islamic world and Byzantium in exchange for finished goods. The trade imbalance was so persistent that European silver drained steadily eastward for centuries.</p>
+    <div class="callout">
+      <p><strong>Europe spent centuries in the periphery before its later rise. The current hierarchy isn't ancient or natural. It's recent.</strong></p>
+    </div>
+  </section>
 
-    <p><strong>The type of death determines what comes next.</strong> Empires die differently too, and the distinction matters for exactly the same reason.</p>
+  <!-- MONGOL -->
+  <section>
+    <h2><span class="date">~1200-1350</span>The Mongol interlude: forced integration</h2>
+    <div class="tech-card">
+      <div class="row"><span class="label tech">Technology</span><span class="value">Composite bow, horse relay communication (yam), adapted siege warfare</span></div>
+      <div class="row"><span class="label advantage">Core advantage</span><span class="value">Military mobility across distances nobody else could cover, plus willingness to absorb conquered technologies</span></div>
+      <div class="row"><span class="label shift">Power shift</span><span class="value">Succession crises, fragmentation into khanates, Black Death, difficulty governing settled civilizations from nomadic tradition</span></div>
+    </div>
+    <p>The Mongols built the largest contiguous land empire in history and, in the process, welded the separate world-systems into something closer to a single global one. China, Central Asia, Persia, and Eastern Europe under one political roof.</p>
+    <p>They were the unusual case of a periphery that overran the cores. Steppe nomads swallowing settled civilizations. But they quickly adopted the same structural patterns: taxing trade, collecting tribute, running the system they'd conquered.</p>
+    <p>The <em>Pax Mongolica</em> moved goods and ideas at a scale nobody had seen before. It also moved the Black Death from Central Asia to Europe, killing roughly a third of the continent. <strong>Interconnection and fragility, traveling together again.</strong></p>
+  </section>
 
-    <h3>Supernova: the Bronze Age collapse</h3>
-
-    <p>Around 1200 BC, the ancient world experienced what may be the purest systemic supernova on record. Nearly every major civilization collapsed within a few decades: Mycenaean Greece, the Hittite Empire, the Egyptian New Kingdom, Ugarit, the Kassite dynasty in Babylon. A cascade so thorough that written records nearly disappeared for centuries afterward.</p>
-
-    <p>The Bronze Age system had been in equilibrium for roughly two thousand years. The fuel was agricultural surplus and long-distance trade. The technology that defined the era — bronze — was also its deepest vulnerability. Tin and copper almost never occur in the same place. Mesopotamia needed tin from Afghanistan and copper from Cyprus. The Hittites depended on trade routes that stretched across Anatolia. The Mycenaeans imported copper from Cyprus and tin from as far as Cornwall. The entire system was one supply chain.</p>
-
-    <p>Then several things broke at once. Prolonged drought cut the agricultural surplus that these societies ran on — the fuel. The "Sea Peoples," probably displaced populations from the collapsing edges, raided coastal cities, disrupting the trade routes. Tin and copper stopped flowing. Without bronze, the military and economic machinery seized up. Internal revolts followed, as populations that could no longer be fed or controlled turned against their own centers.</p>
-
-    <p>No single problem would have been fatal. Any one of these shocks, in isolation, might have been absorbed. <strong>But the system was so interconnected that when several links broke at once, the cascade was total. First systemic crisis on record. Interconnection and fragility turned out to be the same thing.</strong></p>
-
-    <p>The collapse was fast. Within a generation, the political and economic structures that had held for millennia were gone. Palace economies that had centralized writing, administration, and trade simply ceased to exist. The Greek world entered a Dark Age that lasted centuries. That's a supernova — not a gradual decline but a violent detonation that scatters everything.</p>
-
-    <h3>White dwarf: Rome's slow cooling</h3>
-
-    <p>Rome died differently. The equilibrium didn't shatter. It eroded.</p>
-
-    <p>The silver content of the denarius — Rome's standard coin — dropped from 95% under Augustus to under 5% by the late third century. That's not a policy choice. That's a system running out of fuel and debasing the currency to buy time. Borders that had been defensible when the army was well-funded became porous as resources thinned. Regional commanders became warlords when the center could no longer pay or control them. Administrative complexity that had been a strength became a cost the system couldn't bear.</p>
-
-    <p><strong>The periphery didn't conquer Rome. Rome lost the ability to hold itself together.</strong> The energy it generated no longer covered the cost of its own weight. The light faded. The structure held — nominally — for decades after the substance was gone. A white dwarf.</p>
-
-    <p>The Han Dynasty fell to a similar combination half a world away: court infighting, regional warlords, steppe pressure on the frontier. Parallel collapses on opposite sides of the world, driven by the same physics. When equilibrium breaks, it doesn't matter what you call the empire.</p>
-
-    <h3>The star that never ignited: Ming China</h3>
-
-    <p>Between 1405 and 1433, Admiral Zheng He led seven massive expeditions across the Indian Ocean. His fleet included ships over 400 feet long — the largest wooden vessels ever built. Columbus's <em>Santa Maria</em>, sixty years later, was 62 feet. China had the naval capability, the institutional sophistication, the manufacturing base, and the population to become the dominant global center before Europe ever reached open water.</p>
-
+  <!-- MING INTERLUDE -->
+  <section>
+    <h2><span class="date">~1400-1450</span>The great what-if: Ming China turns inward</h2>
+    <p>Between 1405 and 1433, Admiral Zheng He led seven massive expeditions across the Indian Ocean with fleets that dwarfed anything Europe could build. His largest ships were over 400 feet long. Columbus's <em>Santa Maria</em> was 62. China had the naval capability, the institutional sophistication, and the manufacturing base to colonize before Europe ever reached open water.</p>
     <p>Then the Ming court turned inward. The Haijin edicts restricted maritime trade. The treasure fleet was dismantled. Confucian bureaucrats who saw commerce as beneath the state won the argument over admirals who saw opportunity beyond the horizon. Within a generation, the most advanced navy in the world was firewood.</p>
+    <p><strong>This is the single strongest case in 5,000 years of a potential core choosing not to occupy the center.</strong> The seat was open. China had the capability to take it. They walked away. And the seat didn't stay empty — Portugal and Spain filled it within decades. The structure doesn't care about the intentions of any particular player. When one center withdraws, another forms. The game continued without them.</p>
+  </section>
 
-    <p><strong>This is the single strongest case in 5,000 years of a potential core choosing not to occupy the center.</strong> The mass was there. The density advantage was there. The feedback loop was primed. They chose not to ignite.</p>
+  <!-- EUROPEAN RISE -->
+  <section>
+    <h2><span class="date">~1450-1800</span>Europe's rise</h2>
+    <div class="tech-card">
+      <div class="row"><span class="label tech">Technology</span><span class="value">Ocean navigation (caravel, compass), gunpowder weapons, printing press, double-entry bookkeeping</span></div>
+      <div class="row"><span class="label advantage">Core advantage</span><span class="value">Naval reach to new continents, financial tools (joint-stock companies) that made conquest scalable</span></div>
+      <div class="row"><span class="label shift">Power shift</span><span class="value">Spain/Portugal overextended, the Dutch were outscaled by larger nations with more resources</span></div>
+    </div>
+    <p>The big rotation. Europe goes from periphery to core.</p>
+    <p>Several things came together. The fall of Constantinople pushed Europeans to find new trade routes. The Americas meant access to silver, sugar, land, and labor from Africa. The periphery suddenly included entire continents that hadn't been part of the system before.</p>
+    <p>The triangular trade shows the flow clearly. Manufactured goods from Europe to Africa. Labor from Africa to the Americas. Raw materials from the Americas back to Europe. <strong>Every leg moved value toward the center.</strong></p>
+    <p>The Netherlands got there first, inventing the joint-stock company and modern finance along the way. But a small trading nation can only project so much influence. Britain, with more people, a bigger navy, and more territory, eventually took the central position.</p>
+  </section>
 
-    <p>And the seat didn't stay empty. Portugal and Spain filled it within decades. The structure doesn't care about the intentions of any particular player. When one center withdraws, another forms. The game doesn't need you. It only needs someone.</p>
+  <!-- BRITISH -->
+  <section>
+    <h2><span class="date">~1800-1945</span>British centrality: industrial scale</h2>
+    <div class="tech-card">
+      <div class="row"><span class="label tech">Technology</span><span class="value">Steam engine, mechanized manufacturing, railways, telegraph, steel warships</span></div>
+      <div class="row"><span class="label advantage">Core advantage</span><span class="value">Whoever industrialized first set the terms. Machines multiplied output by orders of magnitude. Naval control plus sterling as reserve currency</span></div>
+      <div class="row"><span class="label shift">Power shift</span><span class="value">Industrialization spread to Germany, US, Japan, Russia. Two World Wars burned through wealth. Empire cost more than it returned</span></div>
+    </div>
+    <p>The Industrial Revolution widened the gap between center and periphery more than anything before it. Britain became the new center: the seas, the financial system, the rules of trade.</p>
+    <p>India went from textile exporter to raw material supplier. Africa got partitioned among European powers at the Berlin Conference in 1884. Latin America was formally independent but economically oriented toward European markets.</p>
+    <p>Germany, Japan, Russia, and the US industrialized and started competing for central position. That competition produced two world wars. <strong>Transitions between hegemons have historically been the most violent chapters.</strong></p>
+  </section>
 
-    <!-- COLLAPSE TYPOLOGY -->
-    <div class="diagram-collapse">
-      <div class="collapse-type supernova">
-        <div class="collapse-visual"></div>
-        <span class="collapse-title">Supernova</span>
-        <span class="collapse-desc">Fast. Violent. Total.<br>Everything scatters.</span>
-        <span class="collapse-example">Bronze Age ~1200 BC</span>
+  <!-- AMERICAN -->
+  <section>
+    <h2><span class="date">~1945-present</span>American centrality: the institutional model</h2>
+    <div class="tech-card">
+      <div class="row"><span class="label tech">Technology</span><span class="value">Nuclear energy, computing, the internet, semiconductors, GPS, financial derivatives</span></div>
+      <div class="row"><span class="label advantage">Core advantage</span><span class="value">Dollar as global reserve currency. Alliance network. Control of the tech stack the world runs on</span></div>
+      <div class="row"><span class="label shift">Power shift</span><span class="value">Competitors building parallel systems. Dollar's reserve status under pressure. Semiconductor fragility. Cost of global military presence</span></div>
+    </div>
+    <p>After WWII, the US built a more sophisticated version of the pattern. Instead of territorial control, it created institutions (the UN, IMF, World Bank, NATO, WTO) and made the dollar the operating currency of global trade.</p>
+    <p>The Bretton Woods system, then the petrodollar arrangement, meant international commerce flowed through American currency. That gave the center enormous influence without the overhead of running colonies.</p>
+    <p>The Cold War created a competing center in the Soviet Union. After 1991, a single-center arrangement held for about twenty years.</p>
+  </section>
+
+  <!-- AI SECTION -->
+  <section>
+    <h2>The variable that's never existed before</h2>
+    <p>If the pattern holds, we might be watching the early stages of another shift. The signs fit previous transitions: a center facing rising maintenance costs, semi-peripheral competitors building their own infrastructure, and new technologies that haven't settled into anyone's permanent advantage yet.</p>
+    <p>Wallerstein himself, before he died in 2019, said the modern world-system was entering something bigger than a normal cyclical downturn. A structural transition, the kind that only comes around every few centuries.</p>
+
+    <div class="power-chart">
+      <div class="power-chart-title">Approximate core centrality by era</div>
+      <div class="power-row">
+        <span class="power-era">Bronze Age</span>
+        <div class="power-bar-track"><div class="power-bar" style="width: 25%; background: linear-gradient(90deg, #b08a3a, #9a7530);"><span class="bar-label">Multiple centers</span></div></div>
       </div>
-      <div class="collapse-type whitedwarf">
-        <div class="collapse-visual"></div>
-        <span class="collapse-title">White dwarf</span>
-        <span class="collapse-desc">Slow. Structural.<br>The light fades.</span>
-        <span class="collapse-example">Rome ~200-476 AD</span>
+      <div class="power-row">
+        <span class="power-era">Rome / Han</span>
+        <div class="power-bar-track"><div class="power-bar" style="width: 45%; background: linear-gradient(90deg, #a07a30, #8a6a28);"><span class="bar-label">Regional hegemons</span></div></div>
+      </div>
+      <div class="power-row">
+        <span class="power-era">Islamic Caliphates</span>
+        <div class="power-bar-track"><div class="power-bar" style="width: 50%; background: linear-gradient(90deg, #9a7530, #7a5a20);"><span class="bar-label">Trade crossroads</span></div></div>
+      </div>
+      <div class="power-row">
+        <span class="power-era">Mongol Empire</span>
+        <div class="power-bar-track"><div class="power-bar" style="width: 60%; background: linear-gradient(90deg, #8a6a28, #6a5018);"><span class="bar-label">Forced integration</span></div></div>
+      </div>
+      <div class="power-row">
+        <span class="power-era">European Colonial</span>
+        <div class="power-bar-track"><div class="power-bar" style="width: 70%; background: linear-gradient(90deg, #7a5a20, #5a4010);"><span class="bar-label">Global reach</span></div></div>
+      </div>
+      <div class="power-row">
+        <span class="power-era">British Industrial</span>
+        <div class="power-bar-track"><div class="power-bar" style="width: 80%; background: linear-gradient(90deg, #6a5018, #4a3508);"><span class="bar-label">Industrial dominance</span></div></div>
+      </div>
+      <div class="power-row">
+        <span class="power-era">US Post-WWII</span>
+        <div class="power-bar-track"><div class="power-bar" style="width: 90%; background: linear-gradient(90deg, #5a4010, #3a2a05);"><span class="bar-label">Institutional + tech + currency</span></div></div>
+      </div>
+      <div class="power-row">
+        <span class="power-era" style="color: var(--accent);">AGI era?</span>
+        <div class="power-bar-track"><div class="power-bar" style="width: 95%; background: linear-gradient(90deg, #4a3508, #2a1a00); border: 1px dashed var(--accent);"><span class="bar-label">Total? Or distributed?</span></div></div>
       </div>
     </div>
 
-    <p>Supernovae scatter material violently and trigger rapid reformation. White dwarfs fade slowly and leave a longer vacuum. A star that never ignites leaves the material available for whoever reaches it first. <strong>The type of collapse determines the shape of what comes next.</strong></p>
-  </section>
+    <p>The pattern has survived every previous technological revolution:</p>
 
-  <!-- SECTION V: SHOCKWAVE — HOW DEATH CAUSES REBIRTH -->
-  <section>
-    <h2><span class="phase-label">Phase IV</span>Shockwave — how death causes rebirth</h2>
-
-    <p>Here is the part that nobody has written about.</p>
-
-    <p>In astrophysics, a supernova doesn't just destroy a star. The shockwave — expanding outward at tens of thousands of kilometers per second — compresses nearby gas clouds. That compression triggers new gravitational collapse in clouds that were previously too diffuse to form stars on their own. <strong>The death of one star causes the formation of the next.</strong> Our own solar system likely formed from material compressed by a nearby supernova roughly 4.6 billion years ago.</p>
-
-    <p>The same causal link runs through every major transition in human civilization. Centers don't just die. Their deaths create the conditions — displaced knowledge, freed trade routes, power vacuums, scattered populations — from which the next center forms.</p>
-
-    <h3>Rome's debris becomes the Islamic Golden Age</h3>
-
-    <p>When Rome's light faded, the material it had accumulated didn't vanish. Greek philosophical texts, Persian administrative knowledge, Indian mathematical innovations, Egyptian engineering — all of it was scattered across the former Roman and Sassanid peripheries. The knowledge was there. It needed a new center of gravity to collect it.</p>
-
-    <p>The Islamic caliphates were that center. Sitting on every major trade route between three continents — geographic density advantage — they pulled in the scattered material and fused it into something new. The House of Wisdom in Baghdad systematically translated and built on Greek, Persian, Indian, and Chinese knowledge. Algebra and the algorithm — both Arabic words — were synthesized there. Optics, early chemistry, astronomical tables that European navigators would rely on centuries later. Paper manufacturing, adopted from Chinese prisoners of war after the Battle of Talas in 751, let them scale the production of books in a way that Europe, still copying manuscripts on animal skin, couldn't match.</p>
-
-    <p><strong>Baghdad had bookshops when London had mud streets.</strong></p>
-
-    <p>The economy reflected this. The caliphates ran a unified monetary system across a territory larger than Rome's. A merchant could travel from Cordoba to Samarkand using the same currency and legal framework. Agricultural innovation — new irrigation systems, the introduction of rice, cotton, and sugarcane across the Mediterranean — drove the surplus that funded everything else. Per capita income in the Islamic world during this period likely exceeded anything in Europe until the late Renaissance.</p>
-
-    <p>Europe, meanwhile, was the periphery. Medieval Europeans exported timber, furs, and slaves — the word "slave" comes from "Slav" — to the Islamic world and Byzantium in exchange for finished goods. The trade imbalance was so persistent that European silver drained steadily eastward for centuries. <strong>Europe spent centuries in the periphery before its later rise. The current hierarchy isn't ancient or natural. It's recent.</strong></p>
-
-    <p>This wasn't coincidence. It was shockwave physics. Rome's collapse scattered the material. The caliphates' geographic density advantage compressed it into a new center. The death of one directly caused the formation of the next.</p>
-
-    <h3>Bronze Age debris becomes classical Greece</h3>
-
-    <p>The Bronze Age supernova scattered populations, freed trade routes from palace-economy control, and broke the monopoly on literacy and administration that centralized states had maintained. The world that emerged from the Dark Age was radically different from the one that had collapsed.</p>
-
-    <p>Instead of centralized palace economies, the eastern Mediterranean produced distributed city-states — Athens, Corinth, Sparta — and the Phoenician trading networks that connected them. The Phoenicians, themselves products of the collapse (their cities like Tyre and Sidon survived where larger empires hadn't), developed the alphabet that would become the basis for Greek, Latin, Arabic, and eventually most of the world's writing systems.</p>
-
-    <p>The shockwave didn't recreate what was destroyed. It compressed new material into new forms. The supernova's violence was what made the transformation possible — a slower collapse might have produced a diminished version of the old system rather than something genuinely new.</p>
-
-    <h3>Islamic fragmentation becomes European expansion</h3>
-
-    <p>The Mongol destruction of Baghdad in 1258 was catastrophic — libraries burned, irrigation systems destroyed, the caliphate's center gutted. The Crusades disrupted Mediterranean trade routes. The fall of Constantinople in 1453 closed the overland routes to Asia that Europeans had depended on for luxury goods.</p>
-
-    <p>That scattering of material from the Islamic center — combined with the pressure to find new routes — became the fuel for European expansion. Portuguese sailors pushed down the African coast. Columbus went west. The joint-stock company, invented by the Dutch, made colonial ventures scalable. Double-entry bookkeeping made them trackable. The triangular trade — manufactured goods to Africa, enslaved labor to the Americas, raw materials back to Europe — extracted surplus from entire continents that hadn't previously been part of the world-system.</p>
-
-    <p>The Mongol Empire had played a crucial intermediate role. A periphery that overran the cores, it welded the separate world-systems into something closer to a single global one. China, Central Asia, Persia, Eastern Europe under one political roof. The <em>Pax Mongolica</em> moved goods and ideas at a scale nobody had seen before. It also moved the Black Death from Central Asia to Europe, killing roughly a third of the continent. <strong>Interconnection and fragility, traveling together again.</strong></p>
-
-    <p>Britain's eventual rise to the center — coal, steam, naval dominance — was the end product of a chain that started with Rome's collapse, ran through the Islamic Golden Age, was scrambled by the Mongols, and was finally compressed into a new center by the specific combination of resources, institutions, and accidents that Britain happened to have.</p>
-
-    <!-- SHOCKWAVE CHAIN -->
-    <div class="diagram-shockwave">
-      <div class="shock-link">
-        <div class="shock-collapse"></div>
-        <span class="shock-arrow">&rarr;</span>
-        <div class="shock-formation"></div>
-        <span class="shock-text"><span class="era">~1200 BC</span><br>Bronze Age supernova &rarr; Classical Greece &amp; Phoenicia</span>
-      </div>
-      <div class="shock-link">
-        <div class="shock-collapse"></div>
-        <span class="shock-arrow">&rarr;</span>
-        <div class="shock-formation"></div>
-        <span class="shock-text"><span class="era">~500 AD</span><br>Rome fades &rarr; Islamic Golden Age</span>
-      </div>
-      <div class="shock-link">
-        <div class="shock-collapse"></div>
-        <span class="shock-arrow">&rarr;</span>
-        <div class="shock-formation"></div>
-        <span class="shock-text"><span class="era">~1250-1450</span><br>Islamic fragmentation &rarr; European expansion</span>
-      </div>
-      <div class="shock-link">
-        <div class="shock-collapse"></div>
-        <span class="shock-arrow">&rarr;</span>
-        <div class="shock-formation"></div>
-        <span class="shock-text"><span class="era">~1945</span><br>European collapse (World Wars) &rarr; American centrality</span>
-      </div>
-      <div class="shock-link">
-        <div class="shock-collapse"></div>
-        <span class="shock-arrow">&rarr;</span>
-        <div class="shock-formation" style="border-style: dashed; box-shadow: none; opacity: 0.5;"></div>
-        <span class="shock-text"><span class="era">~2025?</span><br>American overextension &rarr; ?</span>
-      </div>
+    <div class="tech-grid">
+      <div class="tech-cell">Agriculture<span class="tech-year">~10,000 BC</span></div>
+      <div class="tech-cell">Bronze<span class="tech-year">~3000 BC</span></div>
+      <div class="tech-cell">Iron<span class="tech-year">~1200 BC</span></div>
+      <div class="tech-cell">Gunpowder<span class="tech-year">~900 AD</span></div>
+      <div class="tech-cell">Printing<span class="tech-year">~1440</span></div>
+      <div class="tech-cell">Steam<span class="tech-year">~1770</span></div>
+      <div class="tech-cell">Electricity<span class="tech-year">~1880</span></div>
+      <div class="tech-cell">Nuclear<span class="tech-year">~1945</span></div>
+      <div class="tech-cell">Internet<span class="tech-year">~1990</span></div>
+      <div class="tech-cell current">AI / AGI<span class="tech-year">~2024</span></div>
+      <div class="tech-cell future">Singularity?<span class="tech-year">???</span></div>
+      <div class="tech-cell future" style="border: none; background: none; box-shadow: none;"></div>
     </div>
 
-    <p><strong>Transitions aren't random. The death of one center creates the conditions from which the next center forms.</strong> The shockwave determines <em>where</em>, not luck or destiny. The material never stays scattered for long.</p>
+    <p>Each one reshuffled who sits at the center. None changed the structure. New tools went to whoever already had power, and the geometry reasserted itself.</p>
+    <p>So why would AI be different?</p>
+    <p>The core-periphery structure has always depended on information asymmetry. Centers know more. They have better institutions, deeper talent pools, more accumulated expertise. Every previous technology still needed massive human capital to deploy. Trained workforces, functioning institutions, decades of development.</p>
+    <p>AGI changes that. If a system can reason at or beyond human level, the knowledge gap between center and periphery stops being structural. Centuries of accumulated advantage become replicable. The thing that actually separates the tiers could become universally available for the first time.</p>
+    <p>But every technology that could have been decentralizing got absorbed by existing power structures instead. The internet was going to democratize information. It produced a handful of companies worth more than most countries. Nuclear energy was going to be limitless. It became a geopolitical bargaining chip.</p>
+    <p>AI development right now is concentrated in a few organizations in a few countries. Training a frontier model costs hundreds of millions of dollars. If that concentration holds, AI doesn't flatten the hierarchy. It steepens it. <strong>The center gets superintelligent automation. The periphery gets chatbots.</strong> And AGI under centralized control isn't a structural shift. It's the most powerful concentration of capability ever built. Whoever runs it doesn't just sit at the center. They <em>are</em> the center, in a way that makes every previous hegemon look distributed by comparison.</p>
+    <p>So whether AI breaks the 5,000-year pattern or writes its next chapter probably comes down to infrastructure. If models become open and capable on cheap hardware, there's a real window. Maybe the first real window in recorded history for the structure to change, not just the occupants.</p>
+    <p>But 5,000 years of precedent says new tools flow toward existing power centers before they flow anywhere else.</p>
   </section>
 
-  <!-- SECTION VI: THE NEW PHYSICS — AI -->
+  <!-- Time compression visual -->
   <section>
-    <h2><span class="phase-label">Phase V?</span>The new physics</h2>
-
-    <p>The pattern has survived every previous technological revolution.</p>
-
-    <p>Agriculture. Bronze. Iron. Gunpowder. Printing. Steam. Electricity. Nuclear fission. The internet. Each one reshuffled who sits at the center. None changed the structure. New tools went to whoever already had power, and the geometry reasserted itself. Every technology that could have been decentralizing got absorbed by existing power structures instead.</p>
-
-    <p>The internet was going to democratize information. It produced a handful of companies worth more than most countries. Nuclear energy was going to be limitless. It became a geopolitical bargaining chip. Radio was going to educate the masses. It became a propaganda tool.</p>
-
-    <p>In the language of stellar physics, every previous technology was <em>fuel</em>. It powered the star — sometimes more efficiently, sometimes triggering a transition to a new center — but it didn't change the fundamental forces. Steam was fuel. Electricity was fuel. Nuclear was fuel. The internet was fuel. The center burned hotter, but it was still a star, and gravity still worked the same way.</p>
-
-    <p><strong>AI might be different. Not because it's more powerful fuel. Because it might change gravity itself.</strong></p>
-
-    <p>The core-periphery structure has always depended on information asymmetry. Centers know more. They have better institutions, deeper talent pools, more accumulated expertise. Every previous technology still needed massive human capital to deploy. You could ship a steam engine to a country that didn't have trained engineers, functioning institutions, and decades of industrial development — and it would sit there. The knowledge gap between center and periphery was structural, and every technology required that structural advantage to operate.</p>
-
-    <p>AGI changes that equation. If a system can reason at or beyond human level, the knowledge gap between center and periphery stops being structural. Centuries of accumulated institutional advantage become replicable. A country that never built a pharmaceutical industry could, in theory, design drugs. A region without a legal tradition could generate contracts. The thing that actually separates the tiers — differential access to expertise — could become universally available for the first time in recorded history.</p>
-
-    <p>That's not new fuel. That's a change in the gravitational constant. If intelligence becomes universally available, the force that creates centers weakens. Not a new rotation. A new physics.</p>
-
-    <p>But there's a reason 5,000 years of precedent should give us pause.</p>
-
-    <p>AI development right now is concentrated in a few organizations in a few countries. Training a frontier model costs hundreds of millions of dollars. The compute required is manufactured in a handful of fabrication plants, mostly in Taiwan, using equipment made by one Dutch company. If that concentration holds, AI doesn't flatten the hierarchy. <strong>It steepens it.</strong> The center gets superintelligent automation. The periphery gets chatbots. And AGI under centralized control isn't a structural shift — it's the most powerful concentration of capability ever built. Whoever runs it doesn't just sit at the center. They <em>are</em> the center, in a way that makes every previous hegemon look distributed by comparison.</p>
-
-    <p>The intervals between rotations have been compressing:</p>
-
-    <!-- TIME COMPRESSION -->
-    <div class="diagram-compression">
-      <div class="compression-bar">
-        <span class="compression-label">Bronze &rarr; Classical</span>
-        <div class="compression-track"><div class="compression-fill" style="width: 100%;"></div></div>
-        <span class="compression-years">~1,800 yr</span>
-      </div>
-      <div class="compression-bar">
-        <span class="compression-label">Classical &rarr; Islamic</span>
-        <div class="compression-track"><div class="compression-fill" style="width: 67%;"></div></div>
-        <span class="compression-years">~1,200 yr</span>
-      </div>
-      <div class="compression-bar">
-        <span class="compression-label">Islamic &rarr; Colonial</span>
-        <div class="compression-track"><div class="compression-fill" style="width: 42%;"></div></div>
-        <span class="compression-years">~750 yr</span>
-      </div>
-      <div class="compression-bar">
-        <span class="compression-label">Colonial &rarr; British</span>
-        <div class="compression-track"><div class="compression-fill" style="width: 19%;"></div></div>
-        <span class="compression-years">~350 yr</span>
-      </div>
-      <div class="compression-bar">
-        <span class="compression-label">British &rarr; American</span>
-        <div class="compression-track"><div class="compression-fill" style="width: 8%;"></div></div>
-        <span class="compression-years">~145 yr</span>
-      </div>
-      <div class="compression-bar">
-        <span class="compression-label">American &rarr; ?</span>
-        <div class="compression-track"><div class="compression-fill" style="width: 4%; border-style: dashed; background: var(--accent-dim); opacity: 0.5;"></div></div>
-        <span class="compression-years">~80 yr?</span>
+    <div style="margin: 40px auto; max-width: 600px; padding: 30px 0;">
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--text-muted); text-align: center; margin-bottom: 24px;">Time between rotations</div>
+      <div style="display: flex; flex-direction: column; gap: 8px;">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-muted); width: 120px; text-align: right;">Bronze → Classical</span>
+          <div style="flex: 1; height: 6px; background: var(--bg-card); border-radius: 3px; overflow: hidden;">
+            <div style="width: 100%; height: 100%; background: linear-gradient(90deg, var(--accent-dim), var(--accent)); border-radius: 3px;"></div>
+          </div>
+          <span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-muted); width: 60px;">~1,800 yr</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-muted); width: 120px; text-align: right;">Classical → Islamic</span>
+          <div style="flex: 1; height: 6px; background: var(--bg-card); border-radius: 3px; overflow: hidden;">
+            <div style="width: 75%; height: 100%; background: linear-gradient(90deg, var(--accent-dim), var(--accent)); border-radius: 3px;"></div>
+          </div>
+          <span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-muted); width: 60px;">~1,200 yr</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-muted); width: 120px; text-align: right;">Islamic → Colonial</span>
+          <div style="flex: 1; height: 6px; background: var(--bg-card); border-radius: 3px; overflow: hidden;">
+            <div style="width: 45%; height: 100%; background: linear-gradient(90deg, var(--accent-dim), var(--accent)); border-radius: 3px;"></div>
+          </div>
+          <span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-muted); width: 60px;">~750 yr</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-muted); width: 120px; text-align: right;">Colonial → British</span>
+          <div style="flex: 1; height: 6px; background: var(--bg-card); border-radius: 3px; overflow: hidden;">
+            <div style="width: 22%; height: 100%; background: linear-gradient(90deg, var(--accent-dim), var(--accent)); border-radius: 3px;"></div>
+          </div>
+          <span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-muted); width: 60px;">~350 yr</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-muted); width: 120px; text-align: right;">British → American</span>
+          <div style="flex: 1; height: 6px; background: var(--bg-card); border-radius: 3px; overflow: hidden;">
+            <div style="width: 9%; height: 100%; background: linear-gradient(90deg, var(--accent-dim), var(--accent)); border-radius: 3px;"></div>
+          </div>
+          <span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--text-muted); width: 60px;">~145 yr</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--accent); width: 120px; text-align: right;">American → ?</span>
+          <div style="flex: 1; height: 6px; background: var(--bg-card); border-radius: 3px; overflow: hidden;">
+            <div style="width: 5%; height: 100%; background: var(--accent); border-radius: 3px; box-shadow: 0 0 8px var(--accent-glow);"></div>
+          </div>
+          <span style="font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--accent); width: 60px;">~80 yr?</span>
+        </div>
       </div>
     </div>
-
-    <p>If the pattern accelerates, the question isn't just <em>who</em> ends up at the center. It's whether the rotation speed exceeds the system's ability to stabilize. A star that fuses fuel faster and faster doesn't reach a new equilibrium. It detonates.</p>
-
-    <p>So whether AI breaks the 5,000-year pattern or writes its next chapter probably comes down to infrastructure. If models become open and capable on cheap hardware, there's a real window — maybe the first real window in recorded history — for the structure to change, not just the occupants.</p>
-
-    <p><strong>But 5,000 years of precedent says new tools flow toward existing power centers before they flow anywhere else.</strong></p>
   </section>
 
-  <!-- SECTION VII: CLOSING -->
   <section>
-    <p>Stars form because the physics demands it. A slight density advantage, a feedback loop, and gravity does the rest. They hold because fuel balances collapse. They die because the fuel runs out. And their deaths seed the next generation — material scattering outward, compressing new clouds, triggering new collapses into new centers.</p>
-
-    <p>For five thousand years, power has followed the same physics. The material has never stayed scattered for long. The Bronze Age collapse took three centuries to produce classical Greece. Rome's slow cooling took two centuries to produce the Islamic Golden Age. But the material always reformed. <strong>There has always been a center.</strong></p>
-
-    <p>The question — the only new question — is whether a technology that can replicate the thing that makes centers <em>centers</em> might finally change the physics that guarantees them. Not a new rotation. Not a new star forming from old debris. Something that has never happened in five millennia of recorded history.</p>
-
-    <p>Or maybe just the next star, burning hotter than the last, in the same old sky.</p>
+<h2>Back to Monday</h2>
+    <p>Citrini's memo spooked the market because it made the feedback loop feel real. AI replaces workers, workers stop spending, companies buy more AI to protect margins, AI replaces more workers. The Dow dropped 800 points on a piece of speculative fiction. Economists called it allegorical. Traders called it a wake-up call.</p>
+    <p>But zoom out and the loop Citrini described is a specific, modern instance of something that's been running for five millennia. Productive power concentrates. The gains flow to whoever controls it. Everyone else adjusts, or doesn't. The Bronze Age version ran on grain surplus and tin routes. The industrial version ran on steam and capital. The version Citrini is worried about runs on compute and data.</p>
+    <p>The structure is the same. The speed is different. What took centuries to play out in previous rotations could, if the Citrini scenario is even directionally right, compress into years. That's what made Monday feel different from a normal sell-off. Not the size of the drop, but the suspicion that the pattern everyone assumes will self-correct might be moving too fast for correction this time.</p>
+    <p>Maybe it will self-correct. It usually does, eventually, after enough pain and enough policy and enough time. The Bronze Age collapse took three centuries to recover from. Rome's fall left Western Europe in decline for half a millennium. "Eventually" arrived both times. <strong>But "eventually" is a word that covers a lot of history that was miserable to live through.</strong></p>
+    <p>The 800-point drop wasn't really about a Substack post. It was about a 5,000-year-old pattern suddenly feeling like it's accelerating, and nobody being sure who ends up at the center when it stops.</p>
   </section>
+
+  <footer class="footer">
+  </footer>
 
 </div>
 </body>
