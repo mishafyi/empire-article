@@ -43,6 +43,16 @@
   @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
   @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
+  .blog-nav { position: absolute; top: 0; left: 0; right: 0; padding: 24px 32px; z-index: 100; }
+  .blog-nav a { font-family: var(--mono); font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-dim); text-decoration: none; transition: color 0.2s; }
+  .blog-nav a:hover { color: var(--accent); }
+  .article-nav { max-width: 960px; margin: 0 auto; padding: 60px 32px 80px; display: flex; justify-content: space-between; gap: 40px; border-top: 1px solid var(--border); }
+  .article-nav a { text-decoration: none; transition: opacity 0.2s; }
+  .article-nav a:hover { opacity: 0.7; }
+  .nav-dir { font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: 2px; color: var(--text-muted); margin-bottom: 6px; }
+  .nav-title { font-family: var(--serif); font-size: 18px; color: var(--text); line-height: 1.3; }
+  .article-nav .next { text-align: right; margin-left: auto; }
+
   .stats-bar { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); background: var(--bg-elevated); }
   .stat { padding: 40px 30px; text-align: center; border-right: 1px solid var(--border); animation: fadeUp 0.6s ease both; }
   .stat:nth-child(1) { animation-delay: 0.5s; } .stat:nth-child(2) { animation-delay: 0.6s; } .stat:nth-child(3) { animation-delay: 0.7s; } .stat:nth-child(4) { animation-delay: 0.8s; border-right: none; }
@@ -148,6 +158,7 @@
 </style>
 </head>
 <body>
+<nav class="blog-nav"><a href="../index.html">&larr; Misha's Blog</a></nav>
 
 <header class="hero">
   <div class="hero-grid"></div>
@@ -523,6 +534,17 @@
 <div style="margin-top: 1rem; font-family: var(--mono); font-size: 0.9rem; color: #131b27; text-align: center; padding: 0 30px 60px;">
   Sources: Multpl.com &middot; S&P Dow Jones Indices &middot; CNBC &middot; Wikipedia &middot; SEC EDGAR &middot; ~est = monthly interpolation &middot; Pre-1957 uses S&P 90-stock composite
 </div>
+
+<nav class="article-nav">
+  <a href="age-of-empires-2.html">
+    <div class="nav-dir">&larr; Previous</div>
+    <div class="nav-title">Age of Empires 2.0</div>
+  </a>
+  <a href="drone-delivery.html" class="next">
+    <div class="nav-dir">Next &rarr;</div>
+    <div class="nav-title">Death From Above</div>
+  </a>
+</nav>
 
 </body>
 </html>
