@@ -4,6 +4,23 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Misha's Blog</title>
+<meta name="description" content="Essays on power, markets, technology, and the forces that shape civilization.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✦</text></svg>">
+
+<!-- Open Graph -->
+<meta property="og:title" content="Misha's Blog">
+<meta property="og:description" content="Essays on power, markets, technology, and the forces that shape civilization.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://mishafyi.github.io/blog/">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@mishafyi">
+<meta name="twitter:title" content="Misha's Blog">
+<meta name="twitter:description" content="Essays on power, markets, technology, and the forces that shape civilization.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -17,6 +34,7 @@
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
 
   body {
     background: var(--bg);
@@ -63,6 +81,7 @@
   .article-item:hover { opacity: 0.75; }
 
   .article-date {
+    display: block;
     font-family: 'JetBrains Mono', monospace;
     font-size: 12px;
     color: var(--accent-dim);
@@ -72,6 +91,7 @@
   }
 
   .article-title {
+    display: block;
     font-family: 'Instrument Serif', serif;
     font-size: 26px;
     font-weight: 400;
@@ -82,9 +102,29 @@
   }
 
   .article-desc {
+    display: block;
     font-size: 15px;
     color: var(--text-dim);
     line-height: 1.6;
+  }
+
+  footer {
+    padding: 48px 0 60px;
+    border-top: 1px solid var(--border);
+    text-align: center;
+  }
+
+  footer a {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--text-muted);
+    text-decoration: none;
+    letter-spacing: 0.03em;
+    transition: color 0.15s ease;
+  }
+
+  footer a:hover {
+    color: var(--accent);
   }
 </style>
 </head>
@@ -95,45 +135,49 @@
     <h1><a href="index.html">Misha's Blog</a></h1>
   </header>
 
-  <div class="articles">
+  <main class="articles">
 
     <a href="articles/age-of-empires-2.html" class="article-item">
-      <div class="article-date">March 17, 2026</div>
-      <div class="article-title">Age of Empires 2.0: The Nation-State Was the Anomaly</div>
-      <div class="article-desc">The nation-state governed the world for a hundred years. Empire governed it for four thousand. The reversion is already underway.</div>
+      <time class="article-date" datetime="2026-03-17">March 17, 2026</time>
+      <span class="article-title">Age of Empires 2.0: The Nation-State Was the Anomaly</span>
+      <span class="article-desc">The nation-state governed the world for a hundred years. Empire governed it for four thousand. The reversion is already underway.</span>
     </a>
 
     <a href="articles/markets-under-fire.html" class="article-item">
-      <div class="article-date">March 12, 2026</div>
-      <div class="article-title">Markets Under Fire: What 7 Wars Tell Us About the S&P 500</div>
-      <div class="article-desc">84 years of data across 7 major U.S. military conflicts reveal Wall Street's most counterintuitive pattern — and one variable that could break it.</div>
+      <time class="article-date" datetime="2026-03-12">March 12, 2026</time>
+      <span class="article-title">Markets Under Fire: What 7 Wars Tell Us About the S&amp;P 500</span>
+      <span class="article-desc">84 years of data across 7 major U.S. military conflicts reveal Wall Street's most counterintuitive pattern — and one variable that could break it.</span>
     </a>
 
     <a href="articles/drone-delivery.html" class="article-item">
-      <div class="article-date">March 10, 2026</div>
-      <div class="article-title">Death From Above: How Drones Will Bury DoorDash & Uber Eats</div>
-      <div class="article-desc">An $80 billion empire built on subsidized losses and 30% commissions meets a $1-per-delivery competitor that doesn't need roads, drivers, or tips.</div>
+      <time class="article-date" datetime="2026-03-10">March 10, 2026</time>
+      <span class="article-title">Death From Above: How Drones Will Bury DoorDash &amp; Uber Eats</span>
+      <span class="article-desc">An $80 billion empire built on subsidized losses and 30% commissions meets a $1-per-delivery competitor that doesn't need roads, drivers, or tips.</span>
     </a>
 
     <a href="articles/control.html" class="article-item">
-      <div class="article-date">February 27, 2026</div>
-      <div class="article-title">Who Holds Control over AI?</div>
-      <div class="article-desc">Anthropic vs. the Pentagon — what both sides said, and what they might actually mean.</div>
+      <time class="article-date" datetime="2026-02-27">February 27, 2026</time>
+      <span class="article-title">Who Holds Control over AI?</span>
+      <span class="article-desc">Anthropic vs. the Pentagon — what both sides said, and what they might actually mean.</span>
     </a>
 
     <a href="articles/gravity.html" class="article-item">
-      <div class="article-date">February 25, 2026</div>
-      <div class="article-title">The Gravity of Power</div>
-      <div class="article-desc">The same physics that builds stars built every superpower in history.</div>
+      <time class="article-date" datetime="2026-02-25">February 25, 2026</time>
+      <span class="article-title">The Gravity of Power</span>
+      <span class="article-desc">The same physics that builds stars built every superpower in history.</span>
     </a>
 
     <a href="articles/empire.html" class="article-item">
-      <div class="article-date">February 25, 2026</div>
-      <div class="article-title">What if AI breaks the oldest pattern in human civilization?</div>
-      <div class="article-desc">A meditation on five thousand years of power concentration, prompted by a thought experiment about the next two.</div>
+      <time class="article-date" datetime="2026-02-25">February 25, 2026</time>
+      <span class="article-title">What if AI breaks the oldest pattern in human civilization?</span>
+      <span class="article-desc">A meditation on five thousand years of power concentration, prompted by a thought experiment about the next two.</span>
     </a>
 
-  </div>
+  </main>
+
+  <footer>
+    <a href="https://x.com/mishafyi" target="_blank" rel="noopener">@mishafyi</a>
+  </footer>
 
 </div>
 </body>

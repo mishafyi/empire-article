@@ -3,7 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✦</text></svg>">
 <title>Death From Above — How Drone Delivery Will Bury DoorDash & Uber Eats</title>
+<meta name="description" content="An $80 billion food delivery empire built on subsidized losses and 30% commissions is about to meet autonomous drones that deliver for $1. Zipline, Wing, and Flytrex are scaling fast.">
+
+<!-- Open Graph -->
+<meta property="og:title" content="Death From Above — How Drones Will Bury DoorDash & Uber Eats">
+<meta property="og:description" content="An $80 billion empire built on subsidized losses and 30% commissions meets a $1-per-delivery competitor that doesn't need roads, drivers, or tips.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://mishafyi.github.io/blog/articles/drone-delivery.html">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@mishafyi">
+<meta name="twitter:title" content="Death From Above — How Drones Will Bury DoorDash & Uber Eats">
+<meta name="twitter:description" content="An $80 billion empire built on subsidized losses and 30% commissions meets a $1-per-delivery competitor that doesn't need roads, drivers, or tips.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -85,7 +102,7 @@
   .disruption-banner p { font-size: 20px; color: var(--text-dim); max-width: 600px; margin: 0 auto; position: relative; z-index: 1; }
 
   /* ─── PLAYER COMPARISON TABLE ─── */
-  .players-table-wrap { margin: 40px -100px; overflow-x: auto; }
+  .players-table-wrap { margin: 40px -100px; overflow-x: auto; max-width: 100vw; }
   .players-table { width: 100%; border-collapse: collapse; font-size: 14px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 4px; overflow: hidden; table-layout: fixed; }
   .players-table col.label-col { width: 140px; }
   .players-table col.data-col { width: calc((100% - 140px) / 3); }
@@ -100,8 +117,29 @@
   .players-table .g { color: var(--green); }
   .players-table .d { color: var(--text-muted); }
 
+  /* ─── FINANCIAL DATA TABLE ─── */
+  .fin-table { width: 100%; border-collapse: collapse; margin: 16px 0 8px; font-size: 0.95em; }
+  .fin-table th { text-align: left; padding: 8px 6px; color: rgba(255,255,255,0.5); font-weight: 600; }
+  .fin-table th.r { text-align: right; }
+  .fin-table thead tr { border-bottom: 2px solid rgba(255,255,255,0.15); }
+  .fin-table td { padding: 7px 6px; }
+  .fin-table td.r { text-align: right; }
+  .fin-table tbody tr { border-bottom: 1px solid rgba(255,255,255,0.06); }
+  .fin-table tbody tr:last-child { border-bottom: 2px solid rgba(255,255,255,0.15); }
+  .fin-table .neg { color: #ff6b6b; }
+  .fin-table .pos { color: #4ecdc4; }
+  .fin-table .neg-bold { color: #ff6b6b; font-weight: 600; }
+  .fin-table .dim { opacity: 0.4; }
+  .callout-source { margin-top: 8px; font-size: 0.75em; opacity: 0.6; letter-spacing: 0; }
+  .callout-subsection { margin-top: 12px; }
+  .callout-subsection-lg { margin-top: 20px; }
+  .callout-note { font-size: 0.82em; opacity: 0.55; margin: 4px 0 16px; line-height: 1.4; }
+  .callout-footnote { font-size: 15px; margin: 12px 0; }
+  .callout-disclaimer { font-size: 14px; opacity: 0.7; margin: 12px 0 0; }
+
   strong { color: #fff; font-weight: 700; }
   .article-footer { border-top: 1px solid var(--border); margin-top: 60px; padding-top: 40px; font-family: var(--mono); font-size: 12px; color: var(--text-muted); line-height: 1.8; }
+  .article-footer p + p { margin-top: 12px; }
 
   @media (max-width: 768px) {
     .stats-bar { grid-template-columns: repeat(2, 1fr); }
@@ -116,11 +154,20 @@
     .article { padding: 50px 24px; }
     .section-number { font-size: 48px; } .section-title { font-size: 28px; }
     .disruption-banner { margin: 40px -24px; width: calc(100% + 48px); padding: 60px 24px; }
+    .comparison { display: block; overflow-x: auto; }
+    .blog-nav { padding: 16px 20px; }
+    .article-nav { flex-direction: column; gap: 24px; padding: 40px 24px 60px; }
+    .article-nav .next { text-align: left; margin-left: 0; }
+    .social-footer { padding: 0 1.5rem 2rem; }
+    .share-row { gap: 10px; }
+    .social-divider { display: none; }
+    .twitter-follow { margin-left: 0; }
   }
   @media (max-width: 480px) {
     .stats-bar { grid-template-columns: 1fr; }
     .stat { border-right: none; }
     .hero-meta { flex-direction: column; gap: 10px; }
+    .players-table-wrap { margin: 40px -16px; }
   }
 
   .blog-nav { position: absolute; top: 0; left: 0; right: 0; padding: 24px 32px; z-index: 100; }
@@ -132,14 +179,21 @@
   .nav-dir { font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: 2px; color: var(--text-muted); margin-bottom: 6px; }
   .nav-title { font-family: var(--serif); font-size: 18px; color: var(--text); line-height: 1.3; }
   .article-nav .next { text-align: right; margin-left: auto; }
+  .social-footer { max-width: 960px; margin: 0 auto; padding: 0 2rem 2rem; }
+  .share-row { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+  .share-row a, .share-row button { display: inline-flex; align-items: center; gap: 6px; font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; color: var(--text-dim); background: none; border: 1px solid var(--border); padding: 8px 14px; border-radius: 2px; cursor: pointer; transition: color 0.2s, border-color 0.2s; }
+  .share-row a:hover, .share-row button:hover { color: var(--accent); border-color: var(--accent); }
+  .share-row svg { width: 14px; height: 14px; fill: currentColor; }
+  .social-divider { width: 1px; height: 20px; background: var(--border); margin: 0 4px; }
+  .twitter-follow { margin-left: auto; border: none !important; padding: 8px 0 !important; }
 </style>
 </head>
 <body>
 <nav class="blog-nav"><a href="../index.html">&larr; Misha's Blog</a></nav>
 
 <header class="hero">
-  <div class="hero-grid"></div>
-  <div class="hero-drone"><svg width="220" height="220" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <div class="hero-grid" aria-hidden="true"></div>
+  <div class="hero-drone"><svg width="220" height="220" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
     <!-- Arms -->
     <line x1="50" y1="50" x2="20" y2="25" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
     <line x1="50" y1="50" x2="80" y2="25" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
@@ -173,13 +227,11 @@
   <div class="hero-meta"><span>March 2026</span><span>9 min read</span></div>
 </header>
 
-
-
 <article class="article">
 
   <p class="lede">The food delivery duopoly of DoorDash and Uber Eats was built on a simple bet: spend billions subsidizing deliveries, capture the market, then raise prices later. There's just one problem — "later" arrived, and so did drones.</p>
 
-  <div class="section-break"><div class="section-number">01</div><div class="section-title">The Broken Model: A House Built on Burning Cash</div></div>
+  <div class="section-break"><div class="section-number">01</div><div class="section-title" role="heading" aria-level="2">The Broken Model: A House Built on Burning Cash</div></div>
 
   <p>DoorDash dominates the U.S. food delivery market with <strong>an estimated 55–67% share</strong>, depending on how the category is measured. Uber Eats holds about 23%. Together, they process tens of billions of dollars in orders annually. And for most of their existence, they've done it while losing staggering amounts of money.</p>
 
@@ -189,68 +241,68 @@
 
   <div class="callout">
     <div class="callout-header">DoorDash Financials — The Reality</div>
-    <div class="callout-header" style="margin-top: 8px; font-size: 0.75em; opacity: 0.6; letter-spacing: 0;">Source: DoorDash 10-K annual filings, SEC EDGAR (audited by KPMG)</div>
-    <table style="width:100%; border-collapse: collapse; margin: 16px 0 8px 0; font-size: 0.95em;">
+    <div class="callout-header callout-source">Source: DoorDash 10-K annual filings, SEC EDGAR (audited by KPMG)</div>
+    <table class="fin-table">
       <thead>
-        <tr style="border-bottom: 2px solid rgba(255,255,255,0.15);">
-          <th style="text-align:left; padding: 8px 6px; color: rgba(255,255,255,0.5); font-weight: 600;">Year</th>
-          <th style="text-align:right; padding: 8px 6px; color: rgba(255,255,255,0.5); font-weight: 600;">Net Income</th>
-          <th style="text-align:right; padding: 8px 6px; color: rgba(255,255,255,0.5); font-weight: 600;">Buybacks</th>
-          <th style="text-align:right; padding: 8px 6px; color: rgba(255,255,255,0.5); font-weight: 600;">Accum. Deficit</th>
+        <tr>
+          <th>Year</th>
+          <th class="r">Net Income</th>
+          <th class="r">Buybacks</th>
+          <th class="r">Accum. Deficit</th>
         </tr>
       </thead>
       <tbody>
-        <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);">
-          <td style="padding: 7px 6px;">2019</td>
-          <td style="text-align:right; padding: 7px 6px;">—</td>
-          <td style="text-align:right; padding: 7px 6px;">—</td>
-          <td style="text-align:right; padding: 7px 6px; color: #ff6b6b; font-weight: 600;">−$1,152M</td>
+        <tr>
+          <td>2019</td>
+          <td class="r">—</td>
+          <td class="r">—</td>
+          <td class="r neg-bold">−$1,152M</td>
         </tr>
-        <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);">
-          <td style="padding: 7px 6px;">2020</td>
-          <td style="text-align:right; padding: 7px 6px; color: #ff6b6b;">−$461M</td>
-          <td style="text-align:right; padding: 7px 6px; opacity: 0.4;">$0</td>
-          <td style="text-align:right; padding: 7px 6px; color: #ff6b6b; font-weight: 600;">−$1,613M</td>
+        <tr>
+          <td>2020</td>
+          <td class="r neg">−$461M</td>
+          <td class="r dim">$0</td>
+          <td class="r neg-bold">−$1,613M</td>
         </tr>
-        <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);">
-          <td style="padding: 7px 6px;">2021</td>
-          <td style="text-align:right; padding: 7px 6px; color: #ff6b6b;">−$468M</td>
-          <td style="text-align:right; padding: 7px 6px; opacity: 0.4;">$0</td>
-          <td style="text-align:right; padding: 7px 6px; color: #ff6b6b; font-weight: 600;">−$2,081M</td>
+        <tr>
+          <td>2021</td>
+          <td class="r neg">−$468M</td>
+          <td class="r dim">$0</td>
+          <td class="r neg-bold">−$2,081M</td>
         </tr>
-        <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);">
-          <td style="padding: 7px 6px;">2022</td>
-          <td style="text-align:right; padding: 7px 6px; color: #ff6b6b;">−$1,365M</td>
-          <td style="text-align:right; padding: 7px 6px; color: #ff6b6b;">−$400M</td>
-          <td style="text-align:right; padding: 7px 6px; color: #ff6b6b; font-weight: 600;">−$3,846M</td>
+        <tr>
+          <td>2022</td>
+          <td class="r neg">−$1,365M</td>
+          <td class="r neg">−$400M</td>
+          <td class="r neg-bold">−$3,846M</td>
         </tr>
-        <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);">
-          <td style="padding: 7px 6px;">2023</td>
-          <td style="text-align:right; padding: 7px 6px; color: #ff6b6b;">−$558M</td>
-          <td style="text-align:right; padding: 7px 6px; color: #ff6b6b;">−$750M</td>
-          <td style="text-align:right; padding: 7px 6px; color: #ff6b6b; font-weight: 600;">−$5,154M</td>
+        <tr>
+          <td>2023</td>
+          <td class="r neg">−$558M</td>
+          <td class="r neg">−$750M</td>
+          <td class="r neg-bold">−$5,154M</td>
         </tr>
-        <tr style="border-bottom: 1px solid rgba(255,255,255,0.06);">
-          <td style="padding: 7px 6px;">2024</td>
-          <td style="text-align:right; padding: 7px 6px; color: #4ecdc4;">+$123M</td>
-          <td style="text-align:right; padding: 7px 6px; color: #ff6b6b;">−$224M</td>
-          <td style="text-align:right; padding: 7px 6px; color: #ff6b6b; font-weight: 600;">−$5,255M</td>
+        <tr>
+          <td>2024</td>
+          <td class="r pos">+$123M</td>
+          <td class="r neg">−$224M</td>
+          <td class="r neg-bold">−$5,255M</td>
         </tr>
-        <tr style="border-bottom: 2px solid rgba(255,255,255,0.15);">
-          <td style="padding: 7px 6px;">2025</td>
-          <td style="text-align:right; padding: 7px 6px; color: #4ecdc4;">+$935M</td>
-          <td style="text-align:right; padding: 7px 6px; opacity: 0.4;">TBD</td>
-          <td style="text-align:right; padding: 7px 6px; color: #ff6b6b; font-weight: 600;">−$4,320M</td>
+        <tr>
+          <td>2025</td>
+          <td class="r pos">+$935M</td>
+          <td class="r dim">TBD</td>
+          <td class="r neg-bold">−$4,320M</td>
         </tr>
       </tbody>
     </table>
-    <p style="font-size: 0.82em; opacity: 0.55; margin: 4px 0 16px 0; line-height: 1.4;">DoorDash bought back <strong style="color: #ff6b6b;">$1.15B in stock (2022–2023)</strong> while losing money — deepening the deficit shareholders ultimately bear.</p>
-    <div class="callout-header" style="margin-top: 12px;">Acquisitions</div>
+    <p class="callout-note">DoorDash bought back <strong class="neg">$1.15B in stock (2022–2023)</strong> while losing money — deepening the deficit shareholders ultimately bear.</p>
+    <div class="callout-header callout-subsection">Acquisitions</div>
     <ul>
       <li><span>Wolt (2022) — <em>all stock</em>, 46.2M new shares issued</span> <span class="val red">~$3.5B at closing</span></li>
       <li><span>Deliveroo (2025) — <em>all cash</em>, funded by $2.75B in convertible debt due 2030</span> <span class="val red">$3.9B</span></li>
     </ul>
-    <div class="callout-header" style="margin-top: 20px;">Current Valuation</div>
+    <div class="callout-header callout-subsection-lg">Current Valuation</div>
     <ul>
       <li><span>2025 revenue</span> <span class="val">$13.72B</span></li>
       <li><span>Market cap (fluctuating, Mar 2026)</span> <span class="val">~$70–97B</span></li>
@@ -266,7 +318,7 @@
     <cite>Ranjan Roy, Content Strategist</cite>
   </div>
 
-  <div class="section-break"><div class="section-number">02</div><div class="section-title">Everyone Is Unhappy — The Three-Sided Squeeze</div></div>
+  <div class="section-break"><div class="section-number">02</div><div class="section-title" role="heading" aria-level="2">Everyone Is Unhappy — The Three-Sided Squeeze</div></div>
 
   <h3>Restaurants: Working for Free</h3>
 
@@ -300,7 +352,7 @@
     <p>What if delivery cost $1 instead of $8? What if it took 10 minutes instead of 40? What if you didn't need a driver, a car, or a tip?</p>
   </div>
 
-  <div class="section-break"><div class="section-number">03</div><div class="section-title">The Drones Are Here — And They're Scaling Fast</div></div>
+  <div class="section-break"><div class="section-number">03</div><div class="section-title" role="heading" aria-level="2">The Drones Are Here — And They're Scaling Fast</div></div>
 
   <p>This isn't a whitepaper fantasy. Drone delivery is operational, scaling, and accelerating in 2026. Three companies are leading the charge — each with distinct strategies, but all converging on the same conclusion: the gig-driver model is structurally obsolete.</p>
 
@@ -429,7 +481,7 @@
 
   <p>The cost asymmetry is the whole story. Sending a gig worker in a car costs platforms <strong>$6–$8 per delivery</strong>. Flytrex targets approximately <strong>$1 per delivery</strong> at scale. That's a <strong>6 to 8x structural cost advantage</strong>. And unlike human drivers, that cost curve bends <em>down</em> over time as drone technology improves, battery costs fall, and regulatory approvals expand service areas.</p>
 
-  <div class="section-break"><div class="section-number">04</div><div class="section-title">The Innovator's Dilemma — Why the Giants Can't Fight Back</div></div>
+  <div class="section-break"><div class="section-number">04</div><div class="section-title" role="heading" aria-level="2">The Innovator's Dilemma — Why the Giants Can't Fight Back</div></div>
 
   <p>Clayton Christensen's framework has never fit a real-world situation this cleanly. DoorDash and Uber Eats are textbook incumbents facing a disruptive technology — trapped by their own success.</p>
 
@@ -460,13 +512,13 @@
 
   <p>DoorDash's drone bet is a hedge that accelerates the very disruption it's hedging against. The value capture shifts to the operators who own the delivery infrastructure. DoorDash goes from being the indispensable delivery backbone to being an optional software layer. That's a very different business — and a much less valuable one.</p>
 
-  <div class="section-break"><div class="section-number">05</div><div class="section-title">The Regulatory Tailwind</div></div>
+  <div class="section-break"><div class="section-number">05</div><div class="section-title" role="heading" aria-level="2">The Regulatory Tailwind</div></div>
 
   <p>If cost economics are the engine, regulation is the accelerator. The FAA's proposed <strong>Part 108 rules</strong>, expected by spring 2026, will standardize BVLOS approvals, eliminating the need for individual waivers at each new location. Through October 2024, the FAA had issued only 190 total BVLOS waivers. Part 108 removes that bottleneck entirely.</p>
 
   <p>The August 2025 FAA authorization allowing multiple drone companies to operate <strong>in the same airspace</strong> over Dallas-Fort Worth was a watershed moment. The Trump administration has moved to accelerate drone industry growth, issuing executive orders directing regulators to fast-track rules while prioritizing U.S.-made technology. The expansion math changes from "city by city, waiver by waiver" to "nationwide, on demand."</p>
 
-  <div class="section-break"><div class="section-number">06</div><div class="section-title">The Bottom Line</div></div>
+  <div class="section-break"><div class="section-number">06</div><div class="section-title" role="heading" aria-level="2">The Bottom Line</div></div>
 
   <p>The food delivery app model was built on a fundamentally expensive infrastructure — human drivers in personal cars, coordinated by algorithms, paid by gig workers accepting unpredictable wages. That model required <strong>billions in subsidized growth</strong>, charged restaurants commissions so high they lose money on every order, hit consumers with fees that can double their food costs, and still couldn't consistently turn a profit.</p>
 
@@ -476,9 +528,9 @@
 
   <p>The question isn't whether drone delivery will disrupt the incumbents. <strong>It's whether an $80 billion company can survive a technology that makes its core business model — paying humans to drive food around in cars — economically obsolete.</strong></p>
 
-  <div class="callout" style="margin: 40px 0;">
+  <div class="callout">
     <div class="callout-header">The Stock: Priced for Perfection, Facing Disruption</div>
-    <p style="font-size: 15px; margin: 12px 0;">As of March 9, 2026, DoorDash trades around <strong>$176</strong> — down 38% from its 52-week high of $285.50. The numbers tell a sobering story:</p>
+    <p class="callout-footnote">As of March 9, 2026, DoorDash trades around <strong>$176</strong> — down 38% from its 52-week high of $285.50. The numbers tell a sobering story:</p>
     <ul>
       <li><span>P/E ratio</span> <span class="val red">80.6× (vs. US market avg. 38×)</span></li>
       <li><span>Alpha Spread intrinsic value</span> <span class="val">$145.80 — overvalued by 17%</span></li>
@@ -489,7 +541,7 @@
       <li><span>Convertible debt due May 2030</span> <span class="val red">$2.75B (0% interest)</span></li>
       <li><span>2026 investment plans</span> <span class="val red">"Several hundred million" incremental spend</span></li>
     </ul>
-    <p style="font-size: 14px; opacity: 0.7; margin: 12px 0 0 0;">In February 2026, DoorDash missed Q4 earnings ($0.48 EPS vs. $0.58 expected), issued 2026 profit guidance far below consensus, and called its platform integration of DoorDash, Deliveroo, and Wolt a "massive and expensive undertaking." Shares initially plunged ~10%. Citizens cut its price target from $285 to $250. Guggenheim cut from $275 to $255. Needham cut from $275 to $265. In March, DoorDash announced it is exiting four countries — Qatar, Singapore, Japan, and Uzbekistan — across its Deliveroo and Wolt brands. Insiders have been selling — Director Stanley Tang and COO Prabir Adarkar both disclosed share disposals in recent SEC filings. The stock is down ~28% year-to-date vs. the S&P 500's flat return.</p>
+    <p class="callout-disclaimer">In February 2026, DoorDash missed Q4 earnings ($0.48 EPS vs. $0.58 expected), issued 2026 profit guidance far below consensus, and called its platform integration of DoorDash, Deliveroo, and Wolt a "massive and expensive undertaking." Shares initially plunged ~10%. Citizens cut its price target from $285 to $250. Guggenheim cut from $275 to $255. Needham cut from $275 to $265. In March, DoorDash announced it is exiting four countries — Qatar, Singapore, Japan, and Uzbekistan — across its Deliveroo and Wolt brands. Insiders have been selling — Director Stanley Tang and COO Prabir Adarkar both disclosed share disposals in recent SEC filings. The stock is down ~28% year-to-date vs. the S&P 500's flat return.</p>
   </div>
 
   <p>The bull case requires DoorDash to simultaneously grow revenue 25%+ annually, integrate a $3.9B acquisition funded by debt, absorb hundreds of millions in new autonomous delivery investment, maintain profitability it only achieved for the first time in year 11 — and somehow survive a 6–8× cost disruption from the very technology it's investing in. All while trading at over 80× earnings.</p>
@@ -498,10 +550,29 @@
 
   <footer class="article-footer">
     <p><strong>Sources:</strong> DoorDash 10-K annual filings (FY2020–FY2025), SEC EDGAR · DoorDash IPO Prospectus (424B4) · TechCrunch · Bloomberg · Axios · Business of Apps · Statista · CNBC · The Motley Fool · Alpha Spread · WallStreetZen · Sacra · Forge · Crunchbase · PitchBook · Sherwood News · The Robot Report · Flying Magazine · Food On Demand · Wing.com · eMarketer · Commercial UAV News · QSR Magazine · Various industry reports</p>
-    <p style="margin-top: 12px;">Data current as of March 2026. Market capitalizations and stock prices fluctuate daily. This article does not constitute financial advice.</p>
+    <p>Data current as of March 2026. Market capitalizations and stock prices fluctuate daily. This article does not constitute financial advice.</p>
   </footer>
 
 </article>
+
+<div class="social-footer">
+  <div class="share-row">
+    <a href="https://x.com/intent/tweet?url=https://mishafyi.github.io/blog/articles/drone-delivery.html&text=Death%20From%20Above%3A%20How%20Drones%20Will%20Bury%20DoorDash%20%26%20Uber%20Eats" target="_blank" rel="noopener" aria-label="Share on X (Twitter)">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+      Share
+    </a>
+    <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://mishafyi.github.io/blog/articles/drone-delivery.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      Share
+    </a>
+    <button aria-label="Copy link to clipboard" onclick="navigator.clipboard.writeText(window.location.href);this.querySelector('span').textContent='Copied'">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+      <span>Copy link</span>
+    </button>
+    <div class="social-divider"></div>
+    <a href="https://x.com/mishafyi" target="_blank" rel="noopener" class="twitter-follow">@mishafyi</a>
+  </div>
+</div>
 
 <nav class="article-nav">
   <a href="markets-under-fire.html">

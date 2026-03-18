@@ -3,7 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✦</text></svg>">
 <title>Markets Under Fire — S&P 500 During 7 Major U.S. Wars</title>
+<meta name="description" content="84 years of S&P 500 data across 7 major U.S. military conflicts reveal Wall Street's most counterintuitive pattern: wars boost markets. But Iran and the Strait of Hormuz could change everything.">
+
+<!-- Open Graph -->
+<meta property="og:title" content="Markets Under Fire — S&P 500 During 7 Major U.S. Wars">
+<meta property="og:description" content="84 years of data across 7 major U.S. military conflicts reveal Wall Street's most counterintuitive pattern — and one variable that could break it.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://mishafyi.github.io/blog/articles/markets-under-fire.html">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@mishafyi">
+<meta name="twitter:title" content="Markets Under Fire — S&P 500 During 7 Major U.S. Wars">
+<meta name="twitter:description" content="84 years of data across 7 major U.S. military conflicts reveal Wall Street's most counterintuitive pattern — and one variable that could break it.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -135,6 +152,10 @@
 
   strong { color: #fff; font-weight: 700; }
   .article-footer { border-top: 1px solid var(--border); margin-top: 60px; padding-top: 40px; font-family: var(--mono); font-size: 12px; color: var(--text-muted); line-height: 1.8; }
+  .article-footer p + p { margin-top: 12px; }
+  .callout-note { font-size: 13px; color: var(--text-muted); margin-top: 12px; }
+  .callout-note-lg { font-size: 14px; color: var(--text-muted); margin-top: 12px; }
+  .data-sources { margin-top: 1rem; font-family: var(--mono); font-size: 0.9rem; color: #131b27; text-align: center; padding: 0 30px 60px; }
 
   @media (max-width: 768px) {
     .stats-bar { grid-template-columns: repeat(2, 1fr); }
@@ -147,6 +168,13 @@
     .disruption-banner { margin: 40px -24px; width: calc(100% + 48px); padding: 60px 24px; }
     .war-tabs { grid-template-columns: repeat(4, 1fr); }
     .summary-grid { grid-template-columns: repeat(4, 1fr); }
+    .blog-nav { padding: 16px 20px; }
+    .article-nav { flex-direction: column; gap: 24px; padding: 40px 24px 60px; }
+    .article-nav .next { text-align: left; margin-left: 0; }
+    .social-footer { padding: 0 1.5rem 2rem; }
+    .share-row { gap: 10px; }
+    .social-divider { display: none; }
+    .twitter-follow { margin-left: 0; }
   }
   @media (max-width: 480px) {
     .stats-bar { grid-template-columns: 1fr; }
@@ -155,14 +183,21 @@
     .war-tabs { grid-template-columns: repeat(3, 1fr); font-size: 0.75rem; }
     .summary-grid { grid-template-columns: repeat(2, 1fr); }
   }
+  .social-footer { max-width: 960px; margin: 0 auto; padding: 0 2rem 2rem; }
+  .share-row { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+  .share-row a, .share-row button { display: inline-flex; align-items: center; gap: 6px; font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; color: var(--text-dim); background: none; border: 1px solid var(--border); padding: 8px 14px; border-radius: 2px; cursor: pointer; transition: color 0.2s, border-color 0.2s; }
+  .share-row a:hover, .share-row button:hover { color: var(--accent); border-color: var(--accent); }
+  .share-row svg { width: 14px; height: 14px; fill: currentColor; }
+  .social-divider { width: 1px; height: 20px; background: var(--border); margin: 0 4px; }
+  .twitter-follow { margin-left: auto; border: none !important; padding: 8px 0 !important; }
 </style>
 </head>
 <body>
 <nav class="blog-nav"><a href="../index.html">&larr; Misha's Blog</a></nav>
 
 <header class="hero">
-  <div class="hero-grid"></div>
-  <div class="hero-chart"><svg width="280" height="280" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <div class="hero-grid" aria-hidden="true"></div>
+  <div class="hero-chart"><svg width="280" height="280" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
     <polyline points="5,45 15,40 25,38 32,42 38,55 42,62 48,58 55,45 65,32 78,22 92,15" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/>
     <circle cx="42" cy="62" r="10" stroke="white" stroke-width="0.7" fill="none" opacity="0.4"/>
     <line x1="42" y1="50" x2="42" y2="74" stroke="white" stroke-width="0.5" opacity="0.3"/>
@@ -187,7 +222,7 @@
 
   <p class="lede">When America goes to war, Wall Street panics &mdash; then profits. Since Pearl Harbor, every completed U.S. military conflict has ended with the S&P 500 higher than the day the shooting started. The average maximum drawdown is &minus;21.5%. The median return by war's end is +39%. Here's the data behind the most counterintuitive pattern in financial history.</p>
 
-  <div class="section-break"><div class="section-number">01</div><div class="section-title">The Reflex &mdash; Sell Everything</div></div>
+  <div class="section-break"><div class="section-number">01</div><div class="section-title" role="heading" aria-level="2">The Reflex &mdash; Sell Everything</div></div>
 
   <p>The pattern starts the same way every time. A geopolitical shock &mdash; an invasion, an attack, a crossing of a line drawn in the sand &mdash; triggers immediate selling. The Korean War's first trading day saw the S&P plunge <strong>5.4%</strong>, the biggest single-day drop of its era. Iraq's invasion of Kuwait in August 1990 sent the index down 16% in two months. Pearl Harbor, the defining surprise attack of the twentieth century, triggered a 3.5% Dow decline on Day 1 &mdash; then a grinding four-month slide to <strong>&minus;25%</strong>.</p>
 
@@ -203,12 +238,12 @@
       <li><span>Afghanistan (2001&ndash;21) *</span> <span class="val red">&minus;36.9%</span></li>
       <li><span>Iraq War (2003&ndash;11) *</span> <span class="val red">&minus;21.5%</span></li>
     </ul>
-    <p style="font-size: 13px; color: var(--text-muted); margin-top: 12px;">* Afghanistan and Iraq drawdowns compounded by unrelated crises (dot-com bust, 2008 GFC)</p>
+    <p class="callout-note">* Afghanistan and Iraq drawdowns compounded by unrelated crises (dot-com bust, 2008 GFC)</p>
   </div>
 
   <p>The pattern holds regardless of war type, duration, or geopolitical context. Hot wars, cold-turned-hot wars, asymmetric wars, regime-change wars. Six out of six completed conflicts. The market sells the invasion, then buys the recovery.</p>
 
-  <div class="section-break"><div class="section-number">02</div><div class="section-title">The Mobilization &mdash; Why Wars Make Markets</div></div>
+  <div class="section-break"><div class="section-number">02</div><div class="section-title" role="heading" aria-level="2">The Mobilization &mdash; Why Wars Make Markets</div></div>
 
   <p>Wars are fiscal stimulus programs that don't need congressional debate. The mechanism is direct: the government opens the spending taps, defense contracts multiply, factories hire, GDP surges. During World War II, <strong>U.S. manufacturing output doubled</strong> between 1941 and 1943. Unemployment fell from 14.6% in 1940 to 1.2% by 1944. The S&P composite rose 58% from Pearl Harbor to V-J Day &mdash; not despite the war, but because it created the greatest industrial mobilization in human history.</p>
 
@@ -226,7 +261,7 @@
     <p>Select a conflict below to see the actual S&P 500 index values at every critical moment &mdash; from the first shot to the last.</p>
   </div>
 
-  <div class="section-break"><div class="section-number">03</div><div class="section-title">The Data</div></div>
+  <div class="section-break"><div class="section-number">03</div><div class="section-title" role="heading" aria-level="2">The Data</div></div>
 
   <p>The table below tracks the S&P 500 (or its precursor, the S&P 90-stock composite) through each major U.S. military conflict since 1941. Pre-1957 values use the S&P 90-stock composite. Some values are interpolated from monthly data where daily records are unavailable.</p>
 
@@ -244,7 +279,7 @@
     <div class="summary-grid" id="summary-grid"></div>
   </div>
 
-  <div class="section-break"><div class="section-number">04</div><div class="section-title">The Iran Variable</div></div>
+  <div class="section-break"><div class="section-number">04</div><div class="section-title" role="heading" aria-level="2">The Iran Variable</div></div>
 
   <p>On Saturday, February 28, 2026, U.S. and Israeli forces launched coordinated strikes against Iranian military infrastructure, reportedly killing Supreme Leader Ali Khamenei. When markets opened Monday, the S&P 500 barely moved &mdash; rising 0.04%. Oil spiked 10&ndash;13% to $80&ndash;82 per barrel, but equities shrugged.</p>
 
@@ -261,24 +296,24 @@
       <li><span>Estimated oil if Strait closes</span> <span class="val red">$150&ndash;200/bbl</span></li>
       <li><span>GDP drag per $10/bbl increase</span> <span class="val red">&minus;0.2&ndash;0.3%</span></li>
     </ul>
-    <p style="font-size: 14px; color: var(--text-muted); margin-top: 12px;">Twenty percent of the world's traded oil passes through this 21-mile waterway between Iran and Oman. A closure would dwarf the 1973 OPEC embargo.</p>
+    <p class="callout-note-lg">Twenty percent of the world's traded oil passes through this 21-mile waterway between Iran and Oman. A closure would dwarf the 1973 OPEC embargo.</p>
   </div>
 
   <p>Previous wars boosted U.S. GDP through defense spending alone. An Iran war that closes the Strait would simultaneously boost defense spending <em>and</em> crater global energy markets. The net effect is uncertain &mdash; and that uncertainty is what makes Iran fundamentally different from the six conflicts that came before.</p>
 
   <p>If the Strait stays open, the historical pattern predicts a buying opportunity. If it closes, 84 years of precedent may not survive the collision with $200 oil.</p>
 
-  <div class="section-break"><div class="section-number">05</div><div class="section-title">The Bottom Line</div></div>
+  <div class="section-break"><div class="section-number">05</div><div class="section-title" role="heading" aria-level="2">The Bottom Line</div></div>
 
   <p>Six for six. Every completed major U.S. military conflict since 1941 has ended with the S&P higher &mdash; often dramatically &mdash; than when the war began. The median return is <strong>+39%</strong>. The average maximum drawdown is <strong>&minus;21.5%</strong>. The pattern isn't luck; it reflects a structural reality: war mobilization is economic stimulus at massive scale.</p>
 
   <p>The seventh war is still being written. The S&P's initial reaction to Iran follows the historical script: contained, modest, quickly absorbed. But the Strait of Hormuz remains the single variable that could break 84 years of precedent.</p>
 
-  <p>Eighty-four years of data deserves respect. But so does the 21-mile waterway that carries a fifth of the world's oil. &marker;</p>
+  <p>Eighty-four years of data deserves respect. But so does the 21-mile waterway that carries a fifth of the world's oil. &#9632;</p>
 
   <footer class="article-footer">
     <p><strong>Sources:</strong> Multpl.com (historical S&P data) &middot; S&P Dow Jones Indices &middot; CNBC &middot; Wikipedia &middot; AAII &middot; iSectors &middot; CSMonitor &middot; SEC EDGAR &middot; Federal Reserve Economic Data (FRED) &middot; Various historical market records</p>
-    <p style="margin-top: 12px;">Pre-1957 values use the S&P 90-stock composite index. Some intra-month values are interpolated from monthly averages. This article does not constitute financial advice. Past performance does not guarantee future results.</p>
+    <p>Pre-1957 values use the S&P 90-stock composite index. Some intra-month values are interpolated from monthly averages. This article does not constitute financial advice. Past performance does not guarantee future results.</p>
   </footer>
 
 </article>
@@ -531,8 +566,27 @@
 })();
 </script>
 
-<div style="margin-top: 1rem; font-family: var(--mono); font-size: 0.9rem; color: #131b27; text-align: center; padding: 0 30px 60px;">
+<div class="data-sources">
   Sources: Multpl.com &middot; S&P Dow Jones Indices &middot; CNBC &middot; Wikipedia &middot; SEC EDGAR &middot; ~est = monthly interpolation &middot; Pre-1957 uses S&P 90-stock composite
+</div>
+
+<div class="social-footer">
+  <div class="share-row">
+    <a href="https://x.com/intent/tweet?url=https://mishafyi.github.io/blog/articles/markets-under-fire.html&text=Markets%20Under%20Fire%3A%20What%207%20Wars%20Tell%20Us%20About%20the%20S%26P%20500" target="_blank" rel="noopener" aria-label="Share on X (Twitter)">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+      Share
+    </a>
+    <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://mishafyi.github.io/blog/articles/markets-under-fire.html" target="_blank" rel="noopener" aria-label="Share on LinkedIn">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      Share
+    </a>
+    <button aria-label="Copy link to clipboard" onclick="navigator.clipboard.writeText(window.location.href);this.querySelector('span').textContent='Copied'">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg>
+      <span>Copy link</span>
+    </button>
+    <div class="social-divider"></div>
+    <a href="https://x.com/mishafyi" target="_blank" rel="noopener" class="twitter-follow">@mishafyi</a>
+  </div>
 </div>
 
 <nav class="article-nav">
