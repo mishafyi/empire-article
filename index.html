@@ -69,16 +69,44 @@
     padding: 40px 0;
   }
 
+  @keyframes fadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
   .article-item {
     padding: 32px 0;
     border-bottom: 1px solid var(--border);
+    border-left: 3px solid transparent;
+    padding-left: 0;
     display: block;
     text-decoration: none;
     color: inherit;
-    transition: opacity 0.15s ease;
+    transition: transform 0.2s ease, border-left-color 0.2s ease, padding-left 0.2s ease;
+    opacity: 0;
+    animation: fadeUp 0.5s ease forwards;
   }
+  .article-item:nth-child(1) { animation-delay: 0s; }
+  .article-item:nth-child(2) { animation-delay: 0.1s; }
+  .article-item:nth-child(3) { animation-delay: 0.2s; }
+  .article-item:nth-child(4) { animation-delay: 0.3s; }
+  .article-item:nth-child(5) { animation-delay: 0.4s; }
+  .article-item:nth-child(6) { animation-delay: 0.5s; }
   .article-item:last-child { border-bottom: none; }
-  .article-item:hover { opacity: 0.75; }
+  .article-item:hover {
+    border-left-color: var(--accent);
+    padding-left: 16px;
+    transform: translateX(4px);
+  }
+  .article-item:hover .article-title {
+    color: var(--accent);
+  }
 
   .article-date {
     display: block;
@@ -99,6 +127,7 @@
     letter-spacing: -0.01em;
     margin-bottom: 8px;
     line-height: 1.3;
+    transition: color 0.2s ease;
   }
 
   .article-desc {
@@ -126,6 +155,89 @@
   footer a:hover {
     color: var(--accent);
   }
+
+  /* Featured first article */
+  .article-item:first-child {
+    border-left: 3px solid var(--accent);
+    padding-left: 16px;
+  }
+  .article-item:first-child .article-title {
+    font-size: 30px;
+  }
+  .article-item:first-child:hover {
+    padding-left: 16px;
+  }
+
+  /* NEW badge */
+  @keyframes badgePulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+  }
+
+  .badge-new {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: var(--accent);
+    color: var(--bg);
+    padding: 2px 8px;
+    border-radius: 2px;
+    margin-left: 12px;
+    vertical-align: middle;
+    animation: badgePulse 2s ease-in-out infinite;
+  }
+
+  /* === PRINT === */
+  @media print {
+    *, *::before, *::after {
+      background: #fff !important;
+      color: #1a1a1a !important;
+      box-shadow: none !important;
+      text-shadow: none !important;
+    }
+
+    body {
+      font-size: 12pt;
+      line-height: 1.5;
+    }
+
+    footer { display: none !important; }
+
+    .article-item {
+      opacity: 1 !important;
+      animation: none !important;
+      border-left: none !important;
+      padding-left: 0 !important;
+      transform: none !important;
+      transition: none !important;
+    }
+
+    a[href]::after {
+      content: " (" attr(href) ")";
+      font-size: 0.8em;
+      color: #555 !important;
+    }
+
+    header h1 a[href]::after {
+      content: none;
+    }
+
+    header {
+      padding: 40px 0 20px;
+    }
+
+    .container {
+      max-width: 100%;
+      padding: 0;
+    }
+
+    .new-badge {
+      display: none !important;
+    }
+  }
 </style>
 </head>
 <body>
@@ -138,37 +250,37 @@
   <main class="articles">
 
     <a href="articles/age-of-empires-2.html" class="article-item">
-      <time class="article-date" datetime="2026-03-17">March 17, 2026</time>
+      <time class="article-date" datetime="2026-03-17">March 17, 2026 <span class="badge-new">New</span> · <span>16 min read</span></time>
       <span class="article-title">Age of Empires 2.0: The Nation-State Was the Anomaly</span>
       <span class="article-desc">The nation-state governed the world for a hundred years. Empire governed it for four thousand. The reversion is already underway.</span>
     </a>
 
     <a href="articles/markets-under-fire.html" class="article-item">
-      <time class="article-date" datetime="2026-03-12">March 12, 2026</time>
+      <time class="article-date" datetime="2026-03-12">March 12, 2026 · <span>11 min read</span></time>
       <span class="article-title">Markets Under Fire: What 7 Wars Tell Us About the S&amp;P 500</span>
       <span class="article-desc">84 years of data across 7 major U.S. military conflicts reveal Wall Street's most counterintuitive pattern — and one variable that could break it.</span>
     </a>
 
     <a href="articles/drone-delivery.html" class="article-item">
-      <time class="article-date" datetime="2026-03-10">March 10, 2026</time>
+      <time class="article-date" datetime="2026-03-10">March 10, 2026 · <span>14 min read</span></time>
       <span class="article-title">Death From Above: How Drones Will Bury DoorDash &amp; Uber Eats</span>
       <span class="article-desc">An $80 billion empire built on subsidized losses and 30% commissions meets a $1-per-delivery competitor that doesn't need roads, drivers, or tips.</span>
     </a>
 
     <a href="articles/control.html" class="article-item">
-      <time class="article-date" datetime="2026-02-27">February 27, 2026</time>
+      <time class="article-date" datetime="2026-02-27">February 27, 2026 · <span>1 min read</span></time>
       <span class="article-title">Who Holds Control over AI?</span>
       <span class="article-desc">Anthropic vs. the Pentagon — what both sides said, and what they might actually mean.</span>
     </a>
 
     <a href="articles/gravity.html" class="article-item">
-      <time class="article-date" datetime="2026-02-25">February 25, 2026</time>
+      <time class="article-date" datetime="2026-02-25">February 25, 2026 · <span>20 min read</span></time>
       <span class="article-title">The Gravity of Power</span>
       <span class="article-desc">The same physics that builds stars built every superpower in history.</span>
     </a>
 
     <a href="articles/empire.html" class="article-item">
-      <time class="article-date" datetime="2026-02-25">February 25, 2026</time>
+      <time class="article-date" datetime="2026-02-25">February 25, 2026 · <span>14 min read</span></time>
       <span class="article-title">What if AI breaks the oldest pattern in human civilization?</span>
       <span class="article-desc">A meditation on five thousand years of power concentration, prompted by a thought experiment about the next two.</span>
     </a>
