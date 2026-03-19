@@ -33,6 +33,18 @@
     --border: #dddcd8;
   }
 
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0a0a0c;
+      --text: #c8c5be;
+      --text-dim: #6b6860;
+      --text-muted: #4a4840;
+      --accent: #c49a6c;
+      --accent-dim: #a8845a;
+      --border: #1e1e24;
+    }
+  }
+
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; }
 
@@ -106,6 +118,21 @@
   }
   .article-item:hover .article-title {
     color: var(--accent);
+  }
+
+  /* Focus-visible styles for keyboard navigation */
+  .article-item:focus-visible {
+    outline: none;
+    border-left-color: var(--accent);
+    padding-left: 16px;
+  }
+  .article-item:focus-visible .article-title {
+    color: var(--accent);
+  }
+
+  footer a:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 4px;
   }
 
   .article-date {
