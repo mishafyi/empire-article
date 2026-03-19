@@ -19,8 +19,4 @@
 
 ---
 
-Static HTML. No frameworks, no build tools, no dependencies.
-Each essay is a self-contained `.html` file with inline CSS.
-Hosted on GitHub Pages.
-
 **[@mishafyi](https://x.com/mishafyi)**
