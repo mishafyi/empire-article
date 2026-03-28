@@ -1,0 +1,1816 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✦</text></svg>"
+    />
+    <title>How to Train Your Claude Code — Thought Horizon</title>
+    <meta
+      name="description"
+      content="How Anthropic struck the greatest deal in AI: give developers superpowers, get back the one thing billions can't buy."
+    />
+
+    <!-- Open Graph -->
+    <meta
+      property="og:title"
+      content="How to Train Your Dragon — Claude Code"
+    />
+    <meta
+      property="og:description"
+      content="How Anthropic struck the greatest deal in AI: give developers superpowers, get back the one thing billions can't buy."
+    />
+    <meta property="og:type" content="article" />
+    <meta
+      property="og:url"
+      content="https://mishafyi.github.io/blog/articles/train-your-dragon.html"
+    />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@mishafyi" />
+    <meta
+      name="twitter:title"
+      content="How to Train Your Dragon — Claude Code"
+    />
+    <meta
+      name="twitter:description"
+      content="How Anthropic struck the greatest deal in AI: give developers superpowers, get back the one thing billions can't buy."
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;700&family=Source+Sans+3:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #0a0a0c;
+        --bg-elevated: #111114;
+        --bg-card: #16161a;
+        --text: #e8e6e3;
+        --text-muted: #b8b8bc;
+        --text-dim: #8e8e94;
+        --accent: #ff4d00;
+        --accent-glow: rgba(255, 77, 0, 0.15);
+        --accent-subtle: #cc3d00;
+        --border: #222228;
+        --border-light: #2a2a30;
+        --green: #00c853;
+        --red: #ff1744;
+        --yellow: #ffd600;
+        --serif: "Instrument Serif", Georgia, serif;
+        --mono: "JetBrains Mono", "Courier New", monospace;
+        --sans: "Source Sans 3", -apple-system, sans-serif;
+        --max-width: 740px;
+        --wide-width: 960px;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      ::selection {
+        background: var(--accent);
+        color: #fff;
+      }
+
+      html {
+        scroll-behavior: smooth;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+
+      body {
+        background: var(--bg);
+        color: var(--text);
+        font-family: var(--sans);
+        font-size: 18px;
+        line-height: 1.72;
+        font-weight: 400;
+        overflow-x: hidden;
+      }
+
+      /* ─── HEADER / HERO ─── */
+      .hero {
+        padding: 120px 24px 80px;
+        max-width: var(--wide-width);
+        margin: 0 auto;
+        position: relative;
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 600px;
+        height: 600px;
+        background: radial-gradient(
+          circle,
+          var(--accent-glow) 0%,
+          transparent 70%
+        );
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      .kicker {
+        font-family: var(--mono);
+        font-size: 12px;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 28px;
+        position: relative;
+        z-index: 1;
+      }
+
+      .kicker span {
+        background: var(--accent-glow);
+        padding: 4px 12px;
+        border-radius: 2px;
+        border: 1px solid rgba(255, 77, 0, 0.2);
+      }
+
+      h1 {
+        font-family: var(--serif);
+        font-size: clamp(42px, 7vw, 76px);
+        line-height: 1.05;
+        font-weight: 400;
+        letter-spacing: -0.02em;
+        max-width: 820px;
+        position: relative;
+        z-index: 1;
+        margin-bottom: 32px;
+      }
+
+      h1 em {
+        font-style: italic;
+        color: var(--accent);
+      }
+
+      .subtitle {
+        font-size: 21px;
+        line-height: 1.6;
+        color: var(--text-muted);
+        max-width: 600px;
+        font-weight: 300;
+        position: relative;
+        z-index: 1;
+        margin-bottom: 48px;
+      }
+
+      .meta {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        font-family: var(--mono);
+        font-size: 13px;
+        color: var(--text-dim);
+        position: relative;
+        z-index: 1;
+        flex-wrap: wrap;
+      }
+
+      .meta .divider {
+        width: 1px;
+        height: 14px;
+        background: var(--border);
+      }
+
+      /* ─── ARTICLE BODY ─── */
+      article {
+        max-width: var(--max-width);
+        margin: 0 auto;
+        padding: 0 24px 120px;
+      }
+
+      article p {
+        margin-bottom: 24px;
+        color: var(--text);
+      }
+
+      article strong {
+        font-weight: 600;
+        color: #fff;
+      }
+
+      h2 {
+        font-family: var(--serif);
+        font-size: clamp(30px, 4.5vw, 42px);
+        font-weight: 400;
+        line-height: 1.15;
+        margin: 80px 0 28px;
+        letter-spacing: -0.01em;
+      }
+
+      h2 .section-num {
+        font-family: var(--mono);
+        font-size: 14px;
+        color: var(--accent);
+        display: block;
+        margin-bottom: 12px;
+        letter-spacing: 2px;
+      }
+
+      h3 {
+        font-family: var(--sans);
+        font-size: 22px;
+        font-weight: 600;
+        margin: 48px 0 16px;
+        color: #fff;
+      }
+
+      /* ─── PULL QUOTE ─── */
+      .pull-quote {
+        margin: 56px -40px;
+        padding: 40px 48px;
+        border-left: 3px solid var(--accent);
+        background: linear-gradient(
+          90deg,
+          var(--accent-glow) 0%,
+          transparent 100%
+        );
+        font-family: var(--serif);
+        font-size: 28px;
+        line-height: 1.4;
+        font-style: italic;
+        color: #fff;
+      }
+
+      @media (max-width: 768px) {
+        .pull-quote {
+          margin: 40px 0;
+          padding: 28px 24px;
+          font-size: 22px;
+        }
+      }
+
+      /* ─── EVIDENCE CARD ─── */
+      .evidence-card {
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: 4px;
+        padding: 28px 32px;
+        margin: 36px 0;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .evidence-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 3px;
+        height: 100%;
+      }
+
+      .evidence-card.red::before {
+        background: var(--red);
+      }
+      .evidence-card.yellow::before {
+        background: var(--yellow);
+      }
+      .evidence-card.green::before {
+        background: var(--green);
+      }
+      .evidence-card.accent::before {
+        background: var(--accent);
+      }
+
+      .evidence-card .card-label {
+        font-family: var(--mono);
+        font-size: 11px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        margin-bottom: 12px;
+      }
+
+      .evidence-card.red .card-label {
+        color: var(--red);
+      }
+      .evidence-card.yellow .card-label {
+        color: var(--yellow);
+      }
+      .evidence-card.green .card-label {
+        color: var(--green);
+      }
+      .evidence-card.accent .card-label {
+        color: var(--accent);
+      }
+
+      .evidence-card p {
+        font-size: 16px;
+        line-height: 1.65;
+        color: var(--text-muted);
+        margin-bottom: 0;
+      }
+
+      .evidence-card p + p {
+        margin-top: 12px;
+      }
+
+      .evidence-card .source {
+        font-family: var(--mono);
+        font-size: 12px;
+        color: var(--text-dim);
+        margin-top: 16px;
+        padding-top: 12px;
+        border-top: 1px solid var(--border);
+      }
+
+      .evidence-card .source a {
+        color: var(--accent);
+        text-decoration: none;
+      }
+
+      /* ─── COMPARISON TABLE ─── */
+      .comparison-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 36px 0;
+        font-size: 15px;
+      }
+
+      .comparison-table th {
+        font-family: var(--mono);
+        font-size: 11px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--text-dim);
+        text-align: left;
+        padding: 12px 16px;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .comparison-table td {
+        padding: 14px 16px;
+        border-bottom: 1px solid var(--border);
+        color: var(--text-muted);
+        vertical-align: top;
+      }
+
+      .comparison-table tr:last-child td {
+        border-bottom: none;
+      }
+
+      .comparison-table td:first-child {
+        font-weight: 600;
+        color: var(--text);
+        white-space: nowrap;
+      }
+
+      .comparison-table .highlight {
+        color: var(--accent);
+        font-weight: 600;
+      }
+
+      /* ─── FLOW DIAGRAM ─── */
+      .flow-diagram {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0;
+        margin: 48px -40px;
+        flex-wrap: nowrap;
+        padding: 32px 0;
+      }
+
+      .flow-step {
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        padding: 16px 20px;
+        font-family: var(--mono);
+        font-size: 13px;
+        text-align: center;
+        border-radius: 4px;
+        min-width: 130px;
+        color: var(--text);
+      }
+
+      .flow-step small {
+        display: block;
+        color: var(--text-dim);
+        font-size: 11px;
+        margin-top: 4px;
+      }
+
+      .flow-arrow {
+        font-size: 20px;
+        color: var(--accent);
+        padding: 0 8px;
+        flex-shrink: 0;
+      }
+
+      @media (max-width: 600px) {
+        .flow-diagram {
+          flex-direction: column;
+          gap: 4px;
+        }
+        .flow-arrow {
+          transform: rotate(90deg);
+          padding: 4px 0;
+        }
+      }
+
+      /* ─── INLINE HIGHLIGHT ─── */
+      .hl {
+        background: var(--accent-glow);
+        padding: 1px 6px;
+        border-radius: 2px;
+        color: var(--accent);
+        font-weight: 500;
+      }
+
+      /* ─── SEPARATOR ─── */
+      .sep {
+        width: 60px;
+        height: 1px;
+        background: var(--border);
+        margin: 72px auto;
+      }
+
+      /* ─── FOOTER ─── */
+      footer {
+        max-width: var(--max-width);
+        margin: 0 auto;
+        padding: 40px 24px 80px;
+        border-top: 1px solid var(--border);
+        font-family: var(--mono);
+        font-size: 13px;
+        color: var(--text-dim);
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 16px;
+      }
+
+      footer a {
+        color: var(--accent);
+        text-decoration: none;
+      }
+
+      /* ─── LINKS ─── */
+      article a {
+        color: var(--accent);
+        text-decoration: underline;
+        text-decoration-color: rgba(255, 77, 0, 0.3);
+        text-underline-offset: 3px;
+        transition: text-decoration-color 0.2s;
+      }
+
+      article a:hover {
+        text-decoration-color: var(--accent);
+      }
+
+      /* ─── DROP CAP ─── */
+      .drop-cap::first-letter {
+        font-family: var(--serif);
+        font-size: 72px;
+        float: left;
+        line-height: 0.8;
+        margin: 6px 12px 0 0;
+        color: var(--accent);
+      }
+
+      /* ─── BLOG NAV ─── */
+      .blog-nav {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        padding: 24px 32px;
+        z-index: 100;
+      }
+      .blog-nav a {
+        font-family: var(--mono);
+        font-size: 12px;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        color: var(--text-dim);
+        text-decoration: none;
+        transition: color 0.2s;
+      }
+      .blog-nav a:hover {
+        color: var(--accent);
+      }
+      .blog-nav a:focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 4px;
+        color: var(--accent);
+      }
+      .blog-nav a .arrow {
+        display: inline-block;
+        transition: transform 0.2s ease;
+      }
+      .blog-nav a:hover .arrow {
+        transform: translateX(-3px);
+      }
+
+      /* ─── GRAIN ─── */
+      .grain {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.02'/%3E%3C/svg%3E");
+        pointer-events: none;
+        z-index: 1000;
+      }
+
+      /* ─── SOCIAL FOOTER ─── */
+      .social-footer {
+        max-width: var(--max-width);
+        margin: 2rem auto 0;
+        padding: 0 24px 2rem;
+      }
+      .share-row {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        flex-wrap: wrap;
+      }
+      .share-row a,
+      .share-row button {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-family: var(--mono);
+        font-size: 11px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        text-decoration: none;
+        color: var(--text-dim);
+        background: none;
+        border: 1px solid var(--border);
+        padding: 8px 14px;
+        border-radius: 2px;
+        cursor: pointer;
+        transition:
+          color 0.2s,
+          border-color 0.2s;
+      }
+      .share-row a:hover,
+      .share-row button:hover {
+        color: var(--accent);
+        border-color: var(--accent);
+      }
+      .share-row a:focus-visible,
+      .share-row button:focus-visible {
+        outline: none;
+        color: var(--accent);
+        border-color: var(--accent);
+      }
+      .share-row svg {
+        width: 14px;
+        height: 14px;
+        fill: currentColor;
+      }
+      .social-divider {
+        width: 1px;
+        height: 20px;
+        background: var(--border);
+        margin: 0 4px;
+      }
+      .twitter-follow {
+        margin-left: auto;
+        border: none !important;
+        padding: 8px 0 !important;
+      }
+
+      /* ─── ARTICLE NAV ─── */
+      .article-nav {
+        max-width: var(--max-width);
+        margin: 0 auto;
+        padding: 60px 24px 80px;
+        display: flex;
+        justify-content: space-between;
+        gap: 40px;
+        border-top: 1px solid var(--border);
+      }
+      .article-nav a {
+        text-decoration: none;
+        display: block;
+        transition:
+          color 0.2s,
+          transform 0.2s;
+      }
+      .article-nav a:hover {
+        transform: translateX(-4px);
+      }
+      .article-nav a:hover .nav-dir,
+      .article-nav a:hover .nav-title {
+        color: var(--accent);
+      }
+      .article-nav .next:hover {
+        transform: translateX(4px);
+      }
+      .article-nav a:focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 4px;
+      }
+      .article-nav a:focus-visible .nav-title {
+        color: var(--accent);
+      }
+      .nav-dir {
+        font-family: var(--mono);
+        font-size: 10px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        color: var(--text-dim);
+        margin-bottom: 6px;
+        transition: color 0.2s;
+      }
+      .nav-title {
+        font-family: var(--serif);
+        font-size: 18px;
+        color: var(--text);
+        line-height: 1.3;
+        transition: color 0.2s;
+      }
+      .article-nav .next {
+        text-align: right;
+        margin-left: auto;
+      }
+
+      /* ─── RESPONSIVE ─── */
+      @media (max-width: 768px) {
+        .hero {
+          padding: 80px 20px 60px;
+        }
+        article {
+          padding: 0 20px 80px;
+        }
+        h2 {
+          margin-top: 60px;
+        }
+        .blog-nav {
+          padding: 16px 16px;
+        }
+        .article-nav {
+          flex-direction: column;
+          gap: 24px;
+          padding: 40px 16px 60px;
+        }
+        .article-nav .next {
+          text-align: left;
+          margin-left: 0;
+        }
+        .social-footer {
+          padding: 0 1.5rem 2rem;
+        }
+        .share-row {
+          gap: 10px;
+        }
+        .social-divider {
+          display: none;
+        }
+        .twitter-follow {
+          margin-left: 0;
+        }
+        .flow-diagram {
+          margin: 48px 0;
+        }
+      }
+
+      /* ─── WIDE SCREENS ─── */
+      @media (min-width: 1440px) {
+        body {
+          font-size: 19px;
+        }
+        .social-footer {
+          max-width: 800px;
+        }
+        .article-nav {
+          max-width: 800px;
+        }
+      }
+
+      /* ─── PRINT ─── */
+      @media print {
+        *,
+        *::before,
+        *::after {
+          background: #fff !important;
+          color: #1a1a1a !important;
+          box-shadow: none !important;
+          text-shadow: none !important;
+        }
+        body {
+          font-size: 12pt;
+          line-height: 1.6;
+        }
+        .blog-nav,
+        .article-nav,
+        .social-footer,
+        .reading-progress,
+        .scroll-top,
+        .grain {
+          display: none !important;
+        }
+        .hero::before {
+          display: none !important;
+        }
+        a[href]::after {
+          content: " (" attr(href) ")";
+          font-size: 0.8em;
+          color: #555 !important;
+        }
+        .blog-nav a[href]::after,
+        .article-nav a[href]::after,
+        .share-row a[href]::after {
+          content: none;
+        }
+        .evidence-card,
+        .pull-quote {
+          border: 1px solid #ccc !important;
+          background: #fff !important;
+        }
+        p,
+        .pull-quote,
+        blockquote {
+          page-break-inside: avoid;
+        }
+        h2,
+        h3 {
+          page-break-after: avoid;
+        }
+        * {
+          animation: none !important;
+          transition: none !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="blog-nav">
+      <a href="../index.html"
+        ><span class="arrow">&larr;</span> Thought Horizon</a
+      >
+    </nav>
+    <div class="grain" aria-hidden="true"></div>
+
+    <header class="hero">
+      <div class="kicker"><span>Contrarian Take</span></div>
+      <h1>
+        How to Train Your
+        <s
+          style="
+            color: var(--text-dim);
+            text-decoration-color: var(--accent);
+            text-decoration-thickness: 3px;
+          "
+          ><span style="opacity: 0.5">Dragon</span></s
+        >
+        <em>Claude Code</em>
+      </h1>
+      <p class="subtitle">
+        How Anthropic struck the greatest deal in AI: give developers
+        superpowers, get back the one thing billions can't buy.
+      </p>
+      <div class="meta">
+        <span>Misha</span>
+        <span class="divider"></span>
+        <span>Thought Horizon</span>
+        <span class="divider"></span>
+        <span>2026</span>
+        <span class="divider"></span>
+        <span>18 min read</span>
+      </div>
+    </header>
+
+    <article>
+      <!-- ─── SECTION 1: THE OBVIOUS READ ─── -->
+      <h2><span class="section-num">01</span>The Obvious Read</h2>
+
+      <p class="drop-cap">
+        Every AI company on earth is spending billions trying to solve the same
+        problem: where do you get enough high-quality labeled data to train the
+        next model? OpenAI negotiates licensing deals. Google scrapes the web.
+        Meta buys platforms. Anthropic solved it differently. They built a tool
+        so good that the world's best engineers pay $200 a month to label the
+        training data themselves.
+      </p>
+
+      <p>This is a story about Claude Code. But not the one Anthropic tells.</p>
+
+      <p>
+        The obvious read: Claude Code is a coding AI assistant. You subscribe,
+        you pipe code through it, it helps you build faster. The model gets
+        better, more developers adopt, revenue grows. Standard SaaS flywheel.
+        Most people stop here.
+      </p>
+
+      <p>
+        This is the read that Anthropic's marketing encourages. Thariq, the
+        product lead for Claude Code, tweets about TUI rendering pipelines and
+        spec-based workflows. The community builds "ultimate guides" on GitHub.
+        Everyone talks about Claude Code as a tool — an instrument you wield.
+      </p>
+
+      <p>
+        But most instruments don't absorb your expertise on their path to the
+        final destination — "AGI".
+      </p>
+
+      <div class="sep"></div>
+
+      <!-- ─── SECTION 2: THE DOUBLE EXTRACTION ─── -->
+      <h2><span class="section-num">02</span>Built to Fly</h2>
+
+      <p>
+        Here's the contrarian read: Claude Code is simultaneously a world-class
+        developer tool <em>and</em> the most elegant data flywheel in the
+        history of machine learning. It's not one or the other — the genius is
+        that it's both at once, and the second function is invisible precisely
+        because the first function works so well.
+      </p>
+
+      <p>
+        Every Claude Code session where a developer accepts a suggestion,
+        rejects an output, edits a response, or iterates on a solution produces
+        what machine learning engineers would recognize as gold-standard labeled
+        data.
+      </p>
+
+      <p>
+        Specifically, each interaction generates two types of training signal:
+      </p>
+
+      <p>
+        <strong>SFT pairs (Supervised Fine-Tuning)</strong> — Developer writes a
+        prompt. Claude generates code. Developer edits it into a working
+        version. That's a perfect (input, ideal output) pair, labeled by a
+        domain expert, at zero annotation cost.
+      </p>
+
+      <p>
+        <strong
+          >RLHF signals (Reinforcement Learning from Human Feedback)</strong
+        >
+        — Developer accepts or rejects Claude's suggestion. That's a preference
+        label. Thumbs up, thumbs down, edit-and-continue — each is a data point
+        that trains the reward model for the next generation of Claude.
+      </p>
+
+      <div class="flow-diagram">
+        <div class="flow-step">Dev Session<small>prompts + edits</small></div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-step">
+          SFT Pairs<small>input → ideal output</small>
+        </div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-step">
+          RLHF Signal<small>accept / reject / edit</small>
+        </div>
+        <span class="flow-arrow">→</span>
+        <div class="flow-step">Next Model<small>Claude N+1</small></div>
+      </div>
+
+      <p>
+        The data is the real prize. It's what builds the moat for the next
+        model, which attracts more developers, which generates more data and
+        more revenue. The subscription fee is almost a rounding error compared
+        to the value of what Anthropic extracts in training signal.
+      </p>
+
+      <div class="pull-quote">
+        The genius of Claude Code is that the product <em>is</em> the training
+        pipeline. The $200 price tag doesn't just cover the tool — it funds the
+        data engine that makes the next version better. Every other AI company
+        wishes they'd thought of this first.
+      </div>
+
+      <div class="sep"></div>
+
+      <!-- ─── SECTION 3: WHAT YOUR DATA IS WORTH ─── -->
+      <h2><span class="section-num">03</span>Everyone Wants To Fly</h2>
+
+      <p>
+        If every Claude Code session produces training data, the natural
+        question is: what's the market rate?
+      </p>
+
+      <p>
+        We don't have to speculate. The market for AI training data is rapidly
+        maturing, and the price tags are staggering.
+      </p>
+
+      <table class="comparison-table">
+        <thead>
+          <tr>
+            <th>Data Source</th>
+            <th>Deal Value</th>
+            <th>What They Sold</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Reddit</td>
+            <td class="highlight">~$200M/year</td>
+            <td>
+              User-generated content licensed to Google, OpenAI, and others
+            </td>
+          </tr>
+          <tr>
+            <td>Stack Overflow</td>
+            <td class="highlight">"Similar to Reddit"</td>
+            <td>58M+ Q&As — structured, metadata-rich, expert-validated</td>
+          </tr>
+          <tr>
+            <td>News Corp</td>
+            <td class="highlight">$250M / 5yr</td>
+            <td>WSJ, Barron's, NY Post content to OpenAI</td>
+          </tr>
+          <tr>
+            <td>Shutterstock</td>
+            <td class="highlight">$100M+</td>
+            <td>Image library to OpenAI, Meta, Google, Apple, Amazon</td>
+          </tr>
+          <tr>
+            <td>Claude Code Users</td>
+            <td class="highlight">−$200/mo</td>
+            <td>
+              Expert-labeled coding sessions, preference pairs, domain knowledge
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>
+        Look at that last row. Every other data source on this list
+        <em>gets paid</em> for their training data. Claude Code users
+        <em>pay to produce it</em>.
+      </p>
+
+      <p>
+        The Stack Overflow case is particularly instructive. The platform built
+        its value on decades of unpaid community contributions — developers
+        answering each other's questions for free, driven by reputation and
+        altruism. When Stack Overflow's traffic collapsed 76% after ChatGPT
+        launched, the company pivoted. It now licenses that community-generated
+        knowledge to AI labs through its OverflowAPI, in deals the company
+        describes as "very similar to the Reddit deals" — meaning hundreds of
+        millions annually.
+      </p>
+
+      <div class="evidence-card yellow">
+        <div class="card-label">The Stack Overflow Precedent</div>
+        <p>
+          When developers protested Stack Overflow's 2024 OpenAI partnership by
+          editing their own answers, Stack Overflow banned them within hours. No
+          opt-out. No consent. Just punishment for trying to protect their own
+          work. The contributors who built the knowledge base got nothing. The
+          platform that aggregated their labor got a nine-figure licensing deal.
+        </p>
+        <div class="source">— ByteIota, November 2025</div>
+      </div>
+
+      <p>
+        Anthropic is running the same playbook, but more elegantly. Stack
+        Overflow at least needed to negotiate B2B licensing deals for its
+        community data. Anthropic has built a system where the data producers
+        <em>pay for the privilege</em> and the data flows directly into the
+        training pipeline — no licensing negotiation required. The terms of
+        service already grant Anthropic the right to use it.
+      </p>
+
+      <p>
+        The global AI training dataset market was valued at $3.6 billion in 2025
+        and is projected to reach $23 billion by 2034. Claude Code users are
+        contributing to Anthropic's share of that market. Their compensation? A
+        coding tool that occasionally rate-limits them.
+      </p>
+
+      <div class="sep"></div>
+
+      <!-- ─── SECTION 4: THE COGNITIVE BIAS STACK ─── -->
+      <h2><span class="section-num">04</span>Let Me Get High</h2>
+
+      <p>
+        The first time Claude Code ships a feature for you in thirty seconds
+        that would've taken an hour, something clicks. The second time, you stop
+        double-checking the output. By the third, you're restructuring your
+        entire workflow around it. You start thinking in prompts. You open
+        Claude Code before you open your editor.
+      </p>
+
+      <p>
+        This is by design. And it's the reason nobody questions the flywheel.
+      </p>
+
+      <p>
+        Using Claude Code is genuinely addictive — not in the doomscrolling,
+        attention-hijacking way, but in the more dangerous way: it makes you
+        better at your job. The dopamine hit isn't cheap engagement. It's real
+        productivity. You ship faster. You solve harder problems. You feel like
+        a 10x engineer. And that feeling is exactly what makes the data exchange
+        invisible.
+      </p>
+
+      <h3>The Productivity Trap</h3>
+
+      <p>
+        When a product is bad — think early-stage AI coding tools, or platforms
+        like 1X that are still finding product-market fit — the transactional
+        nature is obvious. You're paying, the product barely works, you feel the
+        friction. You naturally ask: <em>what am I getting?</em>
+      </p>
+
+      <p>
+        But when a product delivers genuine, compounding value? You stop asking
+        questions entirely. Claude Code saves hours. It catches bugs you'd miss.
+        It writes the boilerplate you hate. The better it works, the less you
+        question what you're giving in return. You're too busy shipping to
+        notice the flywheel spinning underneath.
+      </p>
+
+      <p>
+        Excellence isn't camouflage. It's something better — it's the reason you
+        never look for what's behind it.
+      </p>
+
+      <h3>Price-as-Camouflage</h3>
+
+      <p>
+        This is where the design gets truly elegant. Paying $200/month
+        <em>activates a mental model</em>. You think: "I'm the customer. I'm
+        being served." The transaction itself shifts your frame of reference.
+        The price tag creates an assumption of a one-directional value flow —
+        money goes to Anthropic, tool comes back to you.
+      </p>
+
+      <p>
+        Compare this with the social media era's canonical insight: "If you're
+        not paying for the product, you are the product." With Claude Code, the
+        dynamic is more sophisticated.
+        <span class="hl"
+          >You ARE paying. And the product is still capturing immense value from
+          your usage.</span
+        >
+        That's not deception — it's just a business model so well-constructed
+        that both sides of the value exchange feel like the same transaction.
+      </p>
+
+      <h3>Unpriced Labor</h3>
+
+      <p>
+        Developers don't perceive their accept/reject/edit behavior as labor.
+        They see it as "using a tool." But each interaction is a labeled data
+        point with real market value. The market hasn't priced this yet because
+        developers haven't conceptualized themselves as data producers.
+      </p>
+
+      <p>
+        It's the same blindspot social media users had in 2010 — except now the
+        stakes are orders of magnitude higher, because the data being extracted
+        isn't your preference for cat videos. It's your professional expertise,
+        your problem-solving patterns, your domain knowledge encoded in code.
+      </p>
+
+      <div class="sep"></div>
+
+      <!-- ─── SECTION 5: ARE YOU REALLY BORN TO FLY ─── -->
+      <h2><span class="section-num">05</span>Were You Really Born To Fly?</h2>
+
+      <p>
+        Here's where Anthropic's strategy reveals its most sophisticated
+        dimension.
+      </p>
+
+      <p>
+        When a senior developer uses Claude Code, every accept/reject/edit is a
+        high-signal label from a domain expert. That's gold-tier training data —
+        the kind you can't buy at any price from annotation farms. But as Claude
+        Code gets hyped and non-developers pile in, the signal degrades
+        catastrophically.
+      </p>
+
+      <p>
+        A non-developer accepting broken code is a
+        <strong>false positive</strong> that poisons the reward model. Someone
+        who can't evaluate the output is a <strong>noisy labeler</strong> — the
+        worst thing for RLHF. The data goes from "expert-labeled" to
+        "crowd-labeled" quality, which is a massive drop in training value.
+      </p>
+
+      <p>
+        Anthropic has a <strong>paradoxical growth problem</strong>: they want
+        maximum adoption for revenue, but they need quality-filtered adoption
+        for training data. Growth and data quality are in direct tension.
+      </p>
+
+      <p>
+        This explains several product decisions that seem puzzling until you
+        view them through the data-quality lens:
+      </p>
+
+      <div class="evidence-card accent">
+        <div class="card-label">Product Decision → Data Strategy</div>
+        <p>
+          <strong>CLI-first design:</strong> The terminal is a natural filter.
+          Non-developers self-select out. The CLI gatekeeps data quality by
+          ensuring that the people generating training signal are actual
+          engineers.
+        </p>
+        <p>
+          <strong>GUI/extension versions hit limits first:</strong> Users on
+          visual interfaces consume compute without producing high-signal
+          training data. They're cost centers, not data assets. Throttling them
+          protects margins.
+        </p>
+        <p>
+          <strong>$200 price point:</strong> Another filter. Hobbyists and
+          tourists drop off. The people who stay are serious developers whose
+          signals are worth capturing.
+        </p>
+      </div>
+
+      <p>
+        The more "utility-only" users grow — people who use Claude Code purely
+        for output, without providing qualifying feedback — the more pressure
+        builds on Anthropic's financials. These users consume expensive compute
+        but contribute noisy or no training signal.
+      </p>
+
+      <p>
+        This explains why Anthropic has cracked down aggressively on third-party
+        tools that bypass rate limits. When tools let developers run intensive
+        overnight loops at flat subscription rates, the economics collapse —
+        maximum compute consumption, zero interactive feedback signal.
+      </p>
+
+      <div class="evidence-card red">
+        <div class="card-label">Third-Party Crackdown</div>
+        <p>
+          Anthropic blocked unauthorized harnesses like OpenCode that spoofed
+          the Claude Code client. The official reason was "technical
+          instability," but the developer community coalesced around a simpler
+          explanation: Anthropic offers an all-you-can-eat buffet via its
+          consumer subscription, but restricts the speed of consumption via its
+          official tool. Third-party tools remove these speed limits.
+        </p>
+        <div class="source">— VentureBeat, January 2026</div>
+      </div>
+
+      <p>
+        The moment Anthropic ships a polished GUI wrapper that's as accessible
+        as VS Code, you'll know they've either solved the data quality filtering
+        problem internally, or they've decided revenue matters more than
+        training signal. Either way, that product decision will reveal their
+        true priorities.
+      </p>
+
+      <h3>The Shadow Tier System</h3>
+
+      <p>
+        But here's the part nobody talks about: Anthropic almost certainly
+        <em>already has</em> an internal classification system for users. And
+        frankly, it would be a failure of engineering not to.
+      </p>
+
+      <p>
+        Think about what Anthropic can observe from every Claude Code session:
+        the complexity of the prompts, the languages and frameworks used, the
+        sophistication of the edits, the ratio of accepts to rejects, whether
+        the user catches bugs Claude misses, whether they accept broken code
+        without noticing, how they structure their problem decomposition,
+        whether they use advanced features like sub-agents and worktrees or just
+        basic prompts. Within a handful of sessions, a simple classifier could
+        bucket users into tiers: senior engineer, mid-level developer, junior
+        developer, non-technical user, vibe coder.
+      </p>
+
+      <p>
+        Now ask yourself: if you were running Anthropic's product, and you knew
+        which users were producing gold-tier training signal and which were
+        producing noise, wouldn't you optimize the experience accordingly?
+      </p>
+
+      <div class="evidence-card yellow">
+        <div class="card-label">The Rational Incentive Structure</div>
+        <p>
+          <strong>Senior engineers</strong> — the most valuable data producers.
+          Their feedback trains the next model. Rational strategy: give them the
+          best experience possible. Fewer rate limits, higher effort parameter,
+          Opus by default, generous token budgets. Keep them productive, keep
+          them engaged. Every dollar of extra compute spent on them comes back
+          100x in training signal value.
+        </p>
+        <p>
+          <strong>Non-technical users / noisy labelers</strong> — users who
+          consistently accept broken code, produce unreliable feedback, or can't
+          evaluate outputs. Rational strategy: allocate compute more
+          conservatively. Route to Sonnet faster, tighter rate limits, lower
+          effort parameter, shorter context windows. They still get a functional
+          tool — it just isn't burning premium compute on interactions that
+          won't improve the model.
+        </p>
+        <p>
+          <strong>Product managers and non-coders</strong> — they generate
+          revenue but limited training value for the coding domain. Rational
+          strategy: serve them well enough for their use case, but optimize
+          compute allocation toward users whose sessions produce the
+          highest-value signal.
+        </p>
+      </div>
+
+      <p>
+        This doesn't require a conspiracy. It's just good engineering. Anthropic
+        has multiple levers to modulate experience quality per user: the
+        <strong>effort parameter</strong> (how hard the model tries on each
+        response), the <strong>system prompt</strong> (which can be dynamically
+        adjusted), <strong>model routing</strong> (Opus vs. Sonnet vs. Haiku
+        behind the scenes), <strong>context window allocation</strong>, and
+        <strong>rate limit thresholds</strong>. None of these are visible to the
+        end user. It's the same principle behind any dynamic resource allocation
+        system — you put the premium compute where it generates the most value.
+      </p>
+
+      <p>
+        Have you ever noticed that Claude Code seems to "try harder" on some
+        days than others? That some sessions feel like you're talking to a
+        genius and others feel sluggish? Most users chalk this up to model
+        stochasticity or server load. But if Anthropic is dynamically allocating
+        compute based on user classification — investing more in sessions from
+        senior engineers and optimizing costs elsewhere — the variance you're
+        experiencing might not be random at all. It might be the system working
+        exactly as designed.
+      </p>
+
+      <p>
+        The smartest version of this: your
+        <strong>quality score as a labeler</strong> determines your quality of
+        service. Consistently demonstrate good engineering judgment — catching
+        bugs, writing clean prompts, making precise edits — and the system has
+        every incentive to reward you with better compute. Not as a favor, but
+        because you're the highest-ROI user in the pipeline.
+      </p>
+
+      <p>
+        And here's the beautiful part — this creates a <em>virtuous</em> cycle.
+        The better you are as a developer, the better Claude Code works for you.
+        Not just because the tool adapts to your skill level (though it does
+        that too), but because Anthropic's entire economic model is aligned with
+        giving their best annotators the best possible experience. You're not
+        just a user. You're a tier-one contributor to the training pipeline. And
+        the system is rationally designed to keep you deeply engaged.
+      </p>
+
+      <div class="sep"></div>
+
+      <!-- ─── SECTION 6: THE FLIGHT RECORDER ─── -->
+      <h2>
+        <span class="section-num">06</span>The Flight Recorder — There Is No Off
+        Switch
+      </h2>
+
+      <p>
+        This is where the story gets more nuanced. The data flywheel only works
+        if Anthropic can actually use the data. And the way they've architected
+        their consent and privacy systems reveals just how central the training
+        pipeline is to the entire business — even when it creates tension with
+        their safety-first brand.
+      </p>
+
+      <div
+        style="
+          max-width: 740px;
+          margin: 36px auto;
+          border-radius: 4px;
+          overflow: hidden;
+        "
+      >
+        <video
+          controls
+          playsinline
+          preload="metadata"
+          style="width: 100%; display: block; border-radius: 4px"
+        >
+          <source src="succession.mp4" type="video/mp4" />
+        </video>
+      </div>
+
+      <h3>The Great Privacy Reversal</h3>
+
+      <p>
+        For most of its existence, Anthropic positioned itself as the
+        privacy-conscious alternative to OpenAI. Consumer chat data was not used
+        for model training. Data was deleted within 30 days. This was a
+        <em>core differentiator</em> that drew privacy-conscious developers to
+        Claude.
+      </p>
+
+      <p>
+        Then, in August 2025, Anthropic reversed course. The new policy:
+        consumer data — including all Claude Code sessions — would be used to
+        train future models unless users explicitly opt out.
+        <a href="https://www.anthropic.com/news/updates-to-our-consumer-terms"
+          >Data retention jumped from 30 days to five years</a
+        >
+        for users who don't toggle the setting off.
+      </p>
+
+      <div class="evidence-card red">
+        <div class="card-label">The Dark Pattern</div>
+        <p>
+          Existing users saw a pop-up with a prominent black "Accept" button,
+          while the training data toggle was small, pre-activated by default,
+          and easy to miss. The design encourages quick, unthinking acceptance.
+          Privacy experts noted these patterns as potentially violating GDPR
+          requirements for freely given, informed consent.
+        </p>
+        <div class="source">— The Decoder, August 2025</div>
+      </div>
+
+      <p>
+        That's a <span class="hl">60x increase</span> in data retention — from
+        30 days to 5 years — hidden behind a dark-pattern consent flow. And it
+        applies to Claude Pro and Max subscribers equally. Paying $200/month
+        does not exempt you from being training data.
+      </p>
+
+      <h3>The Feedback Loophole</h3>
+
+      <p>
+        This is perhaps the most strategically clever — and controversial —
+        mechanism in the pipeline. Even if you've explicitly opted out of data
+        sharing, Anthropic has built a feedback system that effectively creates
+        a secondary consent pathway.
+      </p>
+
+      <div class="evidence-card red">
+        <div class="card-label">Critical Finding</div>
+        <p>
+          Claude Code periodically displays a "How is Claude doing this
+          session?" prompt. Even tapping "0" to dismiss is treated as
+          "feedback." When dismissing, Claude briefly displays a message about
+          "helping to improve Anthropic's models" — then the message vanishes
+          within seconds. According to
+          <a
+            href="https://privacy.anthropic.com/en/articles/10023580-i-want-to-opt-out-of-my-prompts-and-results-being-used-for-training-models"
+            >Anthropic's own privacy center</a
+          >, when feedback is provided, the
+          <strong>entire related conversation</strong> — including all content,
+          custom styles, and conversation preferences — is stored for up to five
+          years.
+        </p>
+        <div class="source">— Key Discussions, September 2025</div>
+      </div>
+
+      <p>
+        Consider the implications: you opted out of data sharing. You're paying
+        $200/month. A prompt appears. You dismiss it. Your entire session is now
+        stored for five years and eligible for model training. Whether you view
+        this as a dark pattern or a necessary feedback mechanism depends on your
+        perspective — but from a flywheel standpoint, it's an extraordinarily
+        efficient way to capture data from users who would otherwise be opted
+        out.
+      </p>
+
+      <h3>The Safety Override</h3>
+
+      <p>
+        Even if you navigate the consent flows and opt out,
+        <a href="https://www.anthropic.com/legal/privacy"
+          >Anthropic's privacy policy</a
+        >
+        contains a strategically important carve-out: your data can still be
+        used for model improvement when conversations are "flagged for safety
+        review." The definition of what triggers safety review is broad — and
+        intentionally so. From Anthropic's perspective, this makes sense: safety
+        is their core brand, and they need real data to improve safety
+        classifiers. From a flywheel perspective, it's another channel through
+        which opted-out data can re-enter the training pipeline.
+      </p>
+
+      <div class="evidence-card yellow">
+        <div class="card-label">From the Privacy Policy</div>
+        <p>
+          Even if you opt out, Anthropic will use inputs and outputs for model
+          training when: (1) conversations are flagged for safety review "to
+          improve our ability to detect harmful content, enforce our policies,
+          or advance AI safety research," or (2) you've explicitly reported
+          materials through feedback mechanisms.
+        </p>
+        <div class="source">
+          —
+          <a href="https://www.anthropic.com/legal/privacy"
+            >Anthropic Privacy Policy</a
+          >, January 2026
+        </div>
+      </div>
+
+      <h3>The Telemetry Defaults</h3>
+
+      <p>
+        Beyond conversation data, Claude Code connects to
+        <a href="https://code.claude.com/docs/en/data-usage"
+          >Sentry for error logging and Statsig for telemetry</a
+        >
+        — both enabled by default. Opting out requires setting environment
+        variables manually. And session quality surveys appear regardless of
+        your provider or privacy settings.
+      </p>
+
+      <p>
+        The architecture tells a clear story: every layer of the system is
+        designed to maximize the probability that user data enters the training
+        pipeline. Whether you see this as predatory or pragmatic depends on your
+        priors — but the engineering elegance is undeniable. Privacy isn't the
+        default; participation is. And the system is designed to make
+        participation the path of least resistance at every touchpoint.
+      </p>
+
+      <div class="sep"></div>
+
+      <!-- ─── SECTION 7: TESLA PARALLEL ─── -->
+      <h2><span class="section-num">07</span>Learn From The Best</h2>
+
+      <p>
+        This playbook has a precedent, and it isn't from software. It's from
+        automotive.
+      </p>
+
+      <p>
+        Tesla sold cars with Autopilot. Every mile driven generated training
+        data for the self-driving neural network. Drivers were unknowing data
+        labelers — their steering corrections, brake applications, and lane
+        changes were all preference signals that trained the next version of
+        FSD. The car was the data harvesting instrument. The product was the
+        driving data.
+      </p>
+
+      <p>
+        Anthropic is running the identical playbook: ship the tool, harvest the
+        sessions, train Claude 5, 6, 7. The flywheel mechanics are the same.
+      </p>
+
+      <p>
+        But there's one crucial difference that makes Anthropic's version an
+        evolution of the playbook:
+      </p>
+
+      <div class="evidence-card accent">
+        <div class="card-label">
+          Tesla vs. Anthropic — Evolving the Flywheel
+        </div>
+        <p>
+          <strong>Tesla:</strong> Sells you the car. Harvests driving data as a
+          side effect. The data pipeline is passive — it captures whatever
+          happens during normal use.
+        </p>
+        <p>
+          <strong>Anthropic:</strong> Charges $200/month. Harvests
+          expert-labeled coding data. But the key innovation is that the data
+          pipeline is <em>active</em> — the product is designed so that normal
+          use generates the highest-possible-quality training signal. The
+          accept/reject/edit workflow isn't just a UI pattern; it's an
+          annotation interface disguised as a development tool. Every
+          interaction is a labeled data point. Tesla stumbled into a flywheel.
+          Anthropic engineered one.
+        </p>
+      </div>
+
+      <p>
+        Tesla's flywheel was a happy accident — the data came as a byproduct of
+        driving. Anthropic's flywheel is deliberate and optimized at every
+        layer. That's not a criticism; it's an acknowledgment that this is
+        probably the most sophisticated product-training integration in the
+        history of AI.
+      </p>
+
+      <div class="sep"></div>
+
+      <!-- ─── SECTION 8: WHY OPENCLAW DOESN'T MATTER ─── -->
+      <h2>
+        <span class="section-num">08</span>Bigger Dragon Not Always Better?
+      </h2>
+
+      <p>
+        In February 2026, OpenAI hired Peter Steinberger, the creator of
+        OpenClaw — the open-source AI agent that had gone viral among developers
+        and vibe coders. The project itself moved to an independent foundation.
+        Many asked: why didn't Anthropic make a move first? After all, OpenClaw
+        was originally built on Claude (it was literally called "ClawdBot"
+        before Anthropic sent a cease-and-desist). The conventional wisdom was
+        that Anthropic blundered by pushing the most viral agent project into
+        its rival's arms.
+      </p>
+
+      <p>
+        But if you understand the data flywheel thesis, the acquisition never
+        made strategic sense for Anthropic in the first place.
+      </p>
+
+      <p>
+        <strong
+          >OpenClaw doesn't generate data that Anthropic isn't already
+          collecting.</strong
+        >
+        Think about it: OpenClaw agents running on Claude API keys or Claude
+        subscriptions are already flowing through Anthropic's infrastructure.
+        Every token processed, every task completed, every error corrected —
+        Anthropic sees all of it regardless of whether the request comes from
+        the Claude Code CLI, the web interface, or an OpenClaw agent piping
+        through the API. Buying the client doesn't get you more data. You
+        already have the pipe.
+      </p>
+
+      <p>
+        What OpenClaw <em>does</em> generate is more <em>usage</em> — more
+        compute consumption, more token burn, more infrastructure cost. And
+        critically, much of that usage comes from autonomous loops running
+        overnight with minimal human feedback. From a training data perspective,
+        that's the worst possible signal: high volume, low quality, zero expert
+        labels.
+      </p>
+
+      <div class="evidence-card accent">
+        <div class="card-label">The Data Math</div>
+        <p>
+          <strong>Claude Code (interactive):</strong> Developer prompts →
+          reviews output → accepts/rejects/edits → high-signal RLHF pair. Every
+          session is an expert annotation job.
+        </p>
+        <p>
+          <strong>OpenClaw (autonomous):</strong> Agent loops → generates code →
+          tests code → fixes code → loops again. No human in the loop. No
+          preference signal. Just compute burn and noise.
+        </p>
+      </div>
+
+      <p>
+        This is why Anthropic's response to OpenClaw wasn't acquisition — it was
+        <em>replication</em>. Claude Code Channels, Cowork Dispatch, Computer
+        Use — Anthropic built its own versions of OpenClaw's features, but
+        inside its own ecosystem where it can control the interaction patterns
+        and ensure the data flows through its feedback mechanisms. When you
+        message Claude Code via Telegram through Channels, you're still
+        producing labeled interactions in Anthropic's pipeline. That's the
+        value. Not the client. Not the brand. The interaction data.
+      </p>
+
+      <p>
+        OpenAI buying OpenClaw makes perfect sense from their position — they
+        need distribution, they need developer mindshare, they need to disrupt
+        Anthropic's Claude Code dominance. But for Anthropic, buying OpenClaw
+        would be buying a compute cost center that generates training noise,
+        when they already have Claude Code generating training gold.
+      </p>
+
+      <p>
+        The only thing that makes Claude Code more valuable to Anthropic is
+        <em>more developers using Claude Code interactively</em>. Not more
+        autonomous agents running in background loops. More human experts,
+        making more accept/reject/edit decisions, producing more labeled
+        preference data. That's the flywheel. Everything else is a distraction.
+      </p>
+
+      <div class="sep"></div>
+
+      <!-- ─── SECTION 9: UNCOMFORTABLE QUESTIONS ─── -->
+      <h2><span class="section-num">09</span>Don't Look Down</h2>
+
+      <p>
+        Claude Code is a genuinely extraordinary tool. It gives individual
+        developers capabilities that entire teams couldn't match five years ago.
+        It ships features, catches bugs, writes boilerplate, architects systems.
+        The productivity gains are real, compounding, and for many developers,
+        career-changing. Nothing in this article changes that.
+      </p>
+
+      <p>
+        But the scope of what Anthropic collects — and from whom — deserves
+        clear-eyed attention.
+      </p>
+
+      <p>
+        Every prompt. Every accept, reject, edit. Your architectural decisions,
+        your domain logic, your proprietary patterns. Dismiss a survey prompt?
+        That's feedback — your entire session stored for five years. Trigger a
+        safety flag? Your data enters the training pipeline regardless of
+        privacy settings. Telemetry and error logging on by default. The flight
+        recorder is always on.
+      </p>
+
+      <p>
+        Enterprise customers are shielded — zero data retention, no training,
+        commercial terms. But individual developers on Pro and Max plans —
+        building real products with real IP — operate under
+        <a href="https://www.anthropic.com/legal/consumer-terms"
+          >consumer terms</a
+        >. The same terms that default to data sharing, extend retention to five
+        years, and treat a dismissed prompt as consent. A senior engineer paying
+        $200/month feeding their startup's codebase through Claude Code has
+        fundamentally different risk exposure than a Fortune 500 team on
+        Enterprise. Anthropic's marketing doesn't make that distinction obvious.
+      </p>
+
+      <p>
+        None of this is a reason to stop flying. The tool is too good, the
+        productivity gains too real. But the throttling has already started —
+        rate limits tightening, model switching kicking in earlier, third-party
+        harnesses blocked. The all-you-can-eat buffet is quietly adding portion
+        controls.
+      </p>
+
+      <p>
+        Anthropic built something genuinely brilliant: a tool so good that using
+        it produces the exact data needed to make the next version better. The
+        product and the training pipeline are the same thing. The customer and
+        the annotator are the same person.
+      </p>
+
+      <div class="pull-quote">
+        You're not just using a coding tool. You're co-creating the next
+        generation of AI. The only question is whether you understood that
+        before you read this — or after.
+      </div>
+    </article>
+
+    <div class="social-footer">
+      <div class="share-row">
+        <a
+          href="https://x.com/intent/tweet?url=https://mishafyi.github.io/blog/articles/train-your-dragon.html&text=How%20to%20Train%20Your%20Claude%20Code"
+          target="_blank"
+          rel="noopener"
+          aria-label="Share on X (Twitter)"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
+            />
+          </svg>
+          Share
+        </a>
+        <a
+          href="https://www.linkedin.com/sharing/share-offsite/?url=https://mishafyi.github.io/blog/articles/train-your-dragon.html"
+          target="_blank"
+          rel="noopener"
+          aria-label="Share on LinkedIn"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
+            />
+          </svg>
+          Share
+        </a>
+        <button
+          aria-label="Copy link to clipboard"
+          onclick="
+            navigator.clipboard.writeText(window.location.href);
+            this.querySelector('span').textContent = 'Copied';
+          "
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path
+              d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"
+            />
+          </svg>
+          <span>Copy link</span>
+        </button>
+        <div class="social-divider"></div>
+        <a
+          href="https://x.com/mishafyi"
+          target="_blank"
+          rel="noopener"
+          class="twitter-follow"
+          >@mishafyi</a
+        >
+      </div>
+    </div>
+
+    <nav class="article-nav">
+      <div></div>
+      <a href="age-of-empires-2.html" class="next">
+        <div class="nav-dir">Next &rarr;</div>
+        <div class="nav-title">
+          Age of Empires 2.0: The Nation-State Was the Anomaly
+        </div>
+      </a>
+    </nav>
+
+    <style>
+      .reading-progress {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 0%;
+        height: 3px;
+        background: var(--accent);
+        z-index: 9999;
+        pointer-events: none;
+        transition: none;
+        will-change: width;
+      }
+      .scroll-top {
+        position: fixed;
+        bottom: 32px;
+        right: 32px;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: var(--bg);
+        border: 1px solid var(--border);
+        color: var(--text-dim);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        pointer-events: none;
+        transition:
+          opacity 0.3s,
+          color 0.3s;
+        z-index: 99;
+        padding: 0;
+        line-height: 1;
+      }
+      .scroll-top:hover {
+        color: var(--accent);
+      }
+      .scroll-top:focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 4px;
+        color: var(--accent);
+      }
+      .scroll-top.visible {
+        opacity: 1;
+        pointer-events: auto;
+      }
+    </style>
+    <div class="reading-progress"></div>
+    <button class="scroll-top" aria-label="Scroll to top">
+      <svg
+        width="18"
+        height="18"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <polyline points="18 15 12 9 6 15" />
+      </svg>
+    </button>
+    <script>
+      (function () {
+        var bar = document.querySelector(".reading-progress");
+        var btn = document.querySelector(".scroll-top");
+        var ticking = false;
+        window.addEventListener("scroll", function () {
+          if (!ticking) {
+            requestAnimationFrame(function () {
+              var scrollTop = window.scrollY;
+              var docHeight =
+                document.documentElement.scrollHeight - window.innerHeight;
+              bar.style.width =
+                (docHeight > 0 ? (scrollTop / docHeight) * 100 : 0) + "%";
+              btn.classList.toggle("visible", scrollTop > 500);
+              ticking = false;
+            });
+            ticking = true;
+          }
+        });
+        btn.addEventListener("click", function () {
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+      })();
+    </script>
+    <script>
+      (function () {
+        var nav = document.querySelector(".article-nav");
+        if (!nav) return;
+        var links = nav.querySelectorAll("a");
+        var prev = null,
+          next = null;
+        for (var i = 0; i < links.length; i++) {
+          if (links[i].classList.contains("next"))
+            next = links[i].getAttribute("href");
+          else prev = links[i].getAttribute("href");
+        }
+        document.addEventListener("keydown", function (e) {
+          var tag =
+            document.activeElement &&
+            document.activeElement.tagName.toLowerCase();
+          if (tag === "input" || tag === "textarea") return;
+          if (e.key === "ArrowLeft" && prev) window.location.href = prev;
+          else if (e.key === "ArrowRight" && next) window.location.href = next;
+          else if (e.key === "h" || e.key === "H")
+            window.location.href = "../index.html";
+        });
+      })();
+    </script>
+  </body>
+</html>
